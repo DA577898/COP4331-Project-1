@@ -1,13 +1,15 @@
 
 <?php
 
-	$inData = getRequestInfo();
+	$inData = getRequestInfo(); // opening up json
 	
 	$id = 0;
 	$firstName = "";
 	$lastName = "";
 
-	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
+	// mysql server = local host, mySQl username = root, Password = team5Password, database = COP4331
+	// connecting to mysql
+	$conn = new mysqli("localhost", "root", "team5Password", "COP4331"); 	
 	if( $conn->connect_error )
 	{
 		returnWithError( $conn->connect_error );
@@ -15,24 +17,25 @@
 	else
 	{
 		$stmt = $conn->prepare("SELECT ID,firstName,lastName FROM Users WHERE Login=? AND Password =?");
-		$stmt->bind_param("ss", $inData["login"], $inData["password"]);
+		$stmt->bind_param("ss", $inData["login"], $inData["password"]); // ss = both parameters are strings
 		$stmt->execute();
 		$result = $stmt->get_result();
 
+		// handling results
 		if( $row = $result->fetch_assoc()  )
 		{
-			returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'] );
+			returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'] ); // if row is found, returning as JSOn
 		}
 		else
 		{
-			returnWithError("No Records Found");
+			returnWithError("No Records Found"); // if not found, then return an error
 		}
 
 		$stmt->close();
 		$conn->close();
 	}
 	
-	function getRequestInfo()
+	function getRequestInfo() // decoding the json with this function
 	{
 		return json_decode(file_get_contents('php://input'), true);
 	}
