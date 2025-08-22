@@ -1,5 +1,40 @@
 // Authentication form popup functionality
 let currentOpenPopup = null;
+const messageTimers = {}; // Store auto-hide timers per message element
+
+function clearMessage(elementId) {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    el.textContent = '';
+    el.classList.remove('success');
+    if (messageTimers[elementId]) {
+        clearTimeout(messageTimers[elementId]);
+        delete messageTimers[elementId];
+    }
+}
+
+function showMessage(elementId, text, type = 'error', autoHideMs = 5000) {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    // Reset styles
+    el.classList.remove('success');
+    if (type === 'success') {
+        el.classList.add('success');
+    }
+    el.textContent = text;
+    // Reset any prior timer
+    if (messageTimers[elementId]) {
+        clearTimeout(messageTimers[elementId]);
+    }
+    if (autoHideMs > 0) {
+        messageTimers[elementId] = setTimeout(() => {
+            // Only clear if the same text is still present
+            if (el.textContent === text) {
+                clearMessage(elementId);
+            }
+        }, autoHideMs);
+    }
+}
 
 function showLoginForm() {
     // Close any other open popup
@@ -20,6 +55,11 @@ function showLoginForm() {
     // Add blur event listeners for auto-hide error messages
     setupErrorAutoHide('loginUsername', 'loginErrorMessage');
     setupErrorAutoHide('loginPassword', 'loginErrorMessage');
+    // Clear any prior message & success state when opening
+    clearMessage('loginErrorMessage');
+    // Clear message as user types
+    setupInputClear('loginUsername', 'loginErrorMessage');
+    setupInputClear('loginPassword', 'loginErrorMessage');
 }
 
 function showRegisterForm() {
@@ -43,6 +83,13 @@ function showRegisterForm() {
     setupErrorAutoHide('registerEmail', 'registerErrorMessage');
     setupErrorAutoHide('registerPassword', 'registerErrorMessage');
     setupErrorAutoHide('confirmPassword', 'registerErrorMessage');
+    // Clear any prior message & success state when opening
+    clearMessage('registerErrorMessage');
+    // Clear message as user types
+    setupInputClear('registerUsername', 'registerErrorMessage');
+    setupInputClear('registerEmail', 'registerErrorMessage');
+    setupInputClear('registerPassword', 'registerErrorMessage');
+    setupInputClear('confirmPassword', 'registerErrorMessage');
 }
 
 function closeLoginForm() {
@@ -54,7 +101,7 @@ function closeLoginForm() {
     // Clear form and error message
     document.getElementById('loginUsername').value = '';
     document.getElementById('loginPassword').value = '';
-    document.getElementById('loginErrorMessage').textContent = '';
+    clearMessage('loginErrorMessage');
 }
 
 function closeRegisterForm() {
@@ -68,7 +115,7 @@ function closeRegisterForm() {
     document.getElementById('registerEmail').value = '';
     document.getElementById('registerPassword').value = '';
     document.getElementById('confirmPassword').value = '';
-    document.getElementById('registerErrorMessage').textContent = '';
+    clearMessage('registerErrorMessage');
 }
 
 function closeAllPopups() {
@@ -79,6 +126,9 @@ function closeAllPopups() {
     registerPopup.classList.remove('show');
     currentOpenPopup = null;
     document.removeEventListener('click', handleOutsideClick);
+    // Also clear any lingering messages
+    clearMessage('loginErrorMessage');
+    clearMessage('registerErrorMessage');
 }
 
 function handleOutsideClick(event) {
@@ -95,16 +145,10 @@ function handleLogin() {
     const errorElement = document.getElementById('loginErrorMessage');
     
     // Clear previous error
-    errorElement.textContent = '';
+    clearMessage('loginErrorMessage');
     
     if (!username || !password) {
-        errorElement.textContent = 'Please fill in all fields';
-        // Auto-hide error after 5 seconds
-        setTimeout(() => {
-            if (errorElement.textContent === 'Please fill in all fields') {
-                errorElement.textContent = '';
-            }
-        }, 5000);
+        showMessage('loginErrorMessage', 'Please fill in all fields', 'error', 5000);
         return;
     }
     
@@ -112,10 +156,7 @@ function handleLogin() {
     console.log('Login attempt:', { username, password });
     
     // For demo purposes, show success message
-    errorElement.textContent = 'Login functionality would be implemented here';
-    errorElement.style.color = '#059669';
-    errorElement.style.backgroundColor = 'rgba(5, 150, 105, 0.1)';
-    errorElement.style.borderColor = 'rgba(5, 150, 105, 0.2)';
+    showMessage('loginErrorMessage', 'Login functionality would be implemented here', 'success', 2000);
     
     // Clear form and close popup after a delay
     setTimeout(() => {
@@ -133,38 +174,20 @@ function handleRegister() {
     const errorElement = document.getElementById('registerErrorMessage');
     
     // Clear previous error
-    errorElement.textContent = '';
+    clearMessage('registerErrorMessage');
     
     if (!username || !email || !password || !confirmPassword) {
-        errorElement.textContent = 'Please fill in all fields';
-        // Auto-hide error after 5 seconds
-        setTimeout(() => {
-            if (errorElement.textContent === 'Please fill in all fields') {
-                errorElement.textContent = '';
-            }
-        }, 5000);
+        showMessage('registerErrorMessage', 'Please fill in all fields', 'error', 5000);
         return;
     }
     
     if (password !== confirmPassword) {
-        errorElement.textContent = 'Passwords do not match';
-        // Auto-hide error after 5 seconds
-        setTimeout(() => {
-            if (errorElement.textContent === 'Passwords do not match') {
-                errorElement.textContent = '';
-            }
-        }, 5000);
+        showMessage('registerErrorMessage', 'Passwords do not match', 'error', 5000);
         return;
     }
     
     if (password.length < 6) {
-        errorElement.textContent = 'Password must be at least 6 characters long';
-        // Auto-hide error after 5 seconds
-        setTimeout(() => {
-            if (errorElement.textContent === 'Password must be at least 6 characters long') {
-                errorElement.textContent = '';
-            }
-        }, 5000);
+        showMessage('registerErrorMessage', 'Password must be at least 6 characters long', 'error', 5000);
         return;
     }
     
@@ -172,10 +195,7 @@ function handleRegister() {
     console.log('Register attempt:', { username, email, password });
     
     // For demo purposes, show success message
-    errorElement.textContent = 'Registration functionality would be implemented here';
-    errorElement.style.color = '#059669';
-    errorElement.style.backgroundColor = 'rgba(5, 150, 105, 0.1)';
-    errorElement.style.borderColor = 'rgba(5, 150, 105, 0.2)';
+    showMessage('registerErrorMessage', 'Registration functionality would be implemented here', 'success', 2000);
     
     // Clear form and close popup after a delay
     setTimeout(() => {
@@ -202,9 +222,18 @@ function setupErrorAutoHide(inputId, errorMessageId) {
     if (input && errorElement) {
         input.addEventListener('blur', function() {
             // Hide error message when user tabs out of input field
-            if (errorElement.textContent && !errorElement.textContent.includes('functionality would be implemented')) {
-                errorElement.textContent = '';
+            if (errorElement.textContent) {
+                clearMessage(errorMessageId);
             }
+        });
+    }
+}
+
+function setupInputClear(inputId, errorMessageId) {
+    const input = document.getElementById(inputId);
+    if (input) {
+        input.addEventListener('input', function() {
+            clearMessage(errorMessageId);
         });
     }
 }
