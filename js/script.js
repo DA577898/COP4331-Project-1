@@ -1,6 +1,5 @@
-// Authentication form popup functionality
 let currentOpenPopup = null;
-const messageTimers = {}; // Store auto-hide timers per message element
+const messageTimers = {};
 
 function clearMessage(elementId) {
     const el = document.getElementById(elementId);
@@ -16,19 +15,16 @@ function clearMessage(elementId) {
 function showMessage(elementId, text, type = 'error', autoHideMs = 5000) {
     const el = document.getElementById(elementId);
     if (!el) return;
-    // Reset styles
     el.classList.remove('success');
     if (type === 'success') {
         el.classList.add('success');
     }
     el.textContent = text;
-    // Reset any prior timer
     if (messageTimers[elementId]) {
         clearTimeout(messageTimers[elementId]);
     }
     if (autoHideMs > 0) {
         messageTimers[elementId] = setTimeout(() => {
-            // Only clear if the same text is still present
             if (el.textContent === text) {
                 clearMessage(elementId);
             }
@@ -37,55 +33,43 @@ function showMessage(elementId, text, type = 'error', autoHideMs = 5000) {
 }
 
 function showLoginForm() {
-    // Close any other open popup
     closeAllPopups();
     
     const popup = document.getElementById('loginFormPopup');
     popup.classList.add('show');
     currentOpenPopup = popup;
     
-    // Focus on first input for better UX
     setTimeout(() => {
         document.getElementById('loginUsername').focus();
     }, 100);
-    
-    // Close popup when clicking outside
+
     document.addEventListener('click', handleOutsideClick);
     
-    // Add blur event listeners for auto-hide error messages
     setupErrorAutoHide('loginUsername', 'loginErrorMessage');
     setupErrorAutoHide('loginPassword', 'loginErrorMessage');
-    // Clear any prior message & success state when opening
     clearMessage('loginErrorMessage');
-    // Clear message as user types
     setupInputClear('loginUsername', 'loginErrorMessage');
     setupInputClear('loginPassword', 'loginErrorMessage');
 }
 
 function showRegisterForm() {
-    // Close any other open popup
     closeAllPopups();
     
     const popup = document.getElementById('registerFormPopup');
     popup.classList.add('show');
     currentOpenPopup = popup;
     
-    // Focus on first input for better UX
     setTimeout(() => {
         document.getElementById('registerUsername').focus();
     }, 100);
     
-    // Close popup when clicking outside
     document.addEventListener('click', handleOutsideClick);
     
-    // Add blur event listeners for auto-hide error messages
     setupErrorAutoHide('registerUsername', 'registerErrorMessage');
     setupErrorAutoHide('registerEmail', 'registerErrorMessage');
     setupErrorAutoHide('registerPassword', 'registerErrorMessage');
     setupErrorAutoHide('confirmPassword', 'registerErrorMessage');
-    // Clear any prior message & success state when opening
     clearMessage('registerErrorMessage');
-    // Clear message as user types
     setupInputClear('registerUsername', 'registerErrorMessage');
     setupInputClear('registerEmail', 'registerErrorMessage');
     setupInputClear('registerPassword', 'registerErrorMessage');
@@ -98,7 +82,6 @@ function closeLoginForm() {
     currentOpenPopup = null;
     document.removeEventListener('click', handleOutsideClick);
     
-    // Clear form and error message
     document.getElementById('loginUsername').value = '';
     document.getElementById('loginPassword').value = '';
     clearMessage('loginErrorMessage');
@@ -110,7 +93,6 @@ function closeRegisterForm() {
     currentOpenPopup = null;
     document.removeEventListener('click', handleOutsideClick);
     
-    // Clear form and error message
     document.getElementById('registerUsername').value = '';
     document.getElementById('registerEmail').value = '';
     document.getElementById('registerPassword').value = '';
@@ -126,7 +108,6 @@ function closeAllPopups() {
     registerPopup.classList.remove('show');
     currentOpenPopup = null;
     document.removeEventListener('click', handleOutsideClick);
-    // Also clear any lingering messages
     clearMessage('loginErrorMessage');
     clearMessage('registerErrorMessage');
 }
@@ -144,7 +125,6 @@ function handleLogin() {
     const password = document.getElementById('loginPassword').value;
     const errorElement = document.getElementById('loginErrorMessage');
     
-    // Clear previous error
     clearMessage('loginErrorMessage');
     
     if (!username || !password) {
@@ -152,13 +132,10 @@ function handleLogin() {
         return;
     }
     
-    // Here you would typically make an API call to your backend
     console.log('Login attempt:', { username, password });
     
-    // For demo purposes, show success message
     showMessage('loginErrorMessage', 'Login functionality would be implemented here', 'success', 2000);
     
-    // Clear form and close popup after a delay
     setTimeout(() => {
         document.getElementById('loginUsername').value = '';
         document.getElementById('loginPassword').value = '';
@@ -173,7 +150,6 @@ function handleRegister() {
     const confirmPassword = document.getElementById('confirmPassword').value;
     const errorElement = document.getElementById('registerErrorMessage');
     
-    // Clear previous error
     clearMessage('registerErrorMessage');
     
     if (!username || !email || !password || !confirmPassword) {
@@ -191,13 +167,10 @@ function handleRegister() {
         return;
     }
     
-    // Here you would typically make an API call to your backend
     console.log('Register attempt:', { username, email, password });
     
-    // For demo purposes, show success message
     showMessage('registerErrorMessage', 'Registration functionality would be implemented here', 'success', 2000);
     
-    // Clear form and close popup after a delay
     setTimeout(() => {
         document.getElementById('registerUsername').value = '';
         document.getElementById('registerEmail').value = '';
@@ -207,14 +180,12 @@ function handleRegister() {
     }, 2000);
 }
 
-// Close popup when pressing Escape key
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape' && currentOpenPopup) {
         closeAllPopups();
     }
 });
 
-// Mobile hamburger menu toggle
 document.addEventListener('DOMContentLoaded', function() {
     const header = document.querySelector('.header');
     const appContainer = document.querySelector('.app-container');
@@ -231,14 +202,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Function to setup auto-hide error messages on blur (tab out)
 function setupErrorAutoHide(inputId, errorMessageId) {
     const input = document.getElementById(inputId);
     const errorElement = document.getElementById(errorMessageId);
     
     if (input && errorElement) {
         input.addEventListener('blur', function() {
-            // Hide error message when user tabs out of input field
             if (errorElement.textContent) {
                 clearMessage(errorMessageId);
             }
