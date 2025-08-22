@@ -1,26 +1,24 @@
 <?php
 
 	$inData = getRequestInfo();
-	
     $searchResults = "";
-	$searchCount = 0;
+    $searchCount   = 0;
 
     $conn = new mysqli("localhost", "root", "team5Password", "COP4331");
     if ($conn->connect_error) 
 	{
 		returnWithError( $conn->connect_error );
 	} 
-	else
-	{
+	else{
         $searchTerm = "%" . $inData["search"] . "%"; // search term matches anything passed in. and $inData["search"] = what the user types in % . "J" . % = %j% 
         $userId = (int)$inData["userId"]; // we only want to search the contacts of the user who is logged in, and casting to an int
         
         // should be able to search by first Name, last name, email, and phone number
         $stmt = $conn->prepare(
-            "SELECT contactId, firstName, lastName, email, phoneNumber 
+            "SELECT ID, FirstName, LastName, Email, Phone
             FROM Contacts 
-            WHERE userId = ?
-            AND (firstName LIKE ? OR lastName LIKE ? OR phoneNumber LIKE ? OR email LIKE ?)"
+            WHERE UserID = ?
+            AND (FirstName LIKE ? OR LastName LIKE ? OR Phone LIKE ? OR Email LIKE ?)"
         );
 
         $stmt->bind_param("issss", $userId, $searchTerm, $searchTerm, $searchTerm, $searchTerm);
@@ -33,27 +31,23 @@
                 $searchResults .= ",";
             }
             $searchCount++;
-            $searchResults .= '{"contactId":"' . $row["contactId"] . '","firstName":"' . $row["firstName"] . '","lastName":"' . $row["l"] . '","email":"' . $row["email"] . '","phoneNumber":"' . $row["phoneNumber"] . '"}';
+            $searchResults .= '{"contactId":"' . $row["ID"] . '","firstName":"' . $row["FirstName"] . '","lastName":"' . $row["LastName"] . '","email":"' . $row["Email"] . '","phoneNumber":"' . $row["Phone"] . '"}';
         }
 
         if ($searchCount == 0) {
             returnWithError("No Records Found");
         } else {
-            returnWithInfo("[" . $searchResults . "]");
+            sendResultInfoAsJson('{"results":[' . $searchResults . '],"error":""}');
         }
         $stmt->close();
         $conn->close();
+    }
 
-	    sendResultInfoAsJson(json_encode(["results" => $results, "error" => ""]));
-        }
-
-       function getRequestInfo()
-	{
+    function getRequestInfo(){
 		return json_decode(file_get_contents('php://input'), true);
 	}
 
-	function sendResultInfoAsJson( $obj )
-	{
+	function sendResultInfoAsJson( $obj ){
 		header('Content-type: application/json');
 		echo $obj;
 	}
@@ -62,12 +56,5 @@
 	{
 		$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
 		sendResultInfoAsJson( $retValue );
-	}
-	
-	function returnWithInfo( $searchResults )
-	{
-		$retValue = '{"results":[' . $searchResults . '],"error":""}';
-		sendResultInfoAsJson( $retValue );
-	}
-	
+	}	
 ?>
