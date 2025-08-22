@@ -1,103 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacts | Team 20 COP 4331</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Noto+Sans:wght@400;500;600;700;900&display=swap">
-    <link rel="stylesheet" href="/css/styles.css">
-	<script src="/js/script.js"></script>
-	<link rel="icon" href="/images/favicon.ico">
+	<title>COP 4331 LAMP Stack Demo</title>
+	<script type="text/javascript" src="js/md5.js"></script>
+	<script type="text/javascript" src="js/code.js"></script>
+    <link href="css/styles.css" rel="stylesheet">	
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 </head>
 <body>
-    <div class="app-container">
-        <header class="header">
-            <div class="header-content">
-                <div class="logo-section" onclick="window.location.href='/'">
-                    <img src="/images/icon.png" alt="Logo" width="48" height="48">
-					<h2 class="logo-text">Contacts</h2>
-                </div>
-                <nav class="nav-menu">
-                    <div class="nav-links">
-                        <a href="/about" class="nav-link">About</a>
-                    </div>
-                    <div class="nav-actions">
-                        <button class="btn btn-primary" onclick="showLoginForm()">Login</button>
-                        <button class="btn btn-secondary" onclick="showRegisterForm()">Sign Up</button>
-                        <div class="auth-form-popup" id="loginFormPopup">
-                            <div class="auth-form-container">
-                                <div class="auth-form-header">
-                                    <h3>Login</h3>
-                                    <button class="close-btn" onclick="closeLoginForm()">&times;</button>
-                                </div>
-                                <div class="auth-form">
-                                    <div class="form-group">
-                                        <label for="loginUsername">Username</label>
-                                        <input type="text" id="loginUsername" placeholder="Enter username">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="loginPassword">Password</label>
-                                        <input type="password" id="loginPassword" placeholder="Enter password">
-                                    </div>
-                                    <div class="error-message" id="loginErrorMessage"></div>
-                                    <button class="btn btn-primary btn-full" onclick="handleLogin()">Login</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="auth-form-popup" id="registerFormPopup">
-                            <div class="auth-form-container">
-                                <div class="auth-form-header">
-                                    <h3>Register</h3>
-                                    <button class="close-btn" onclick="closeRegisterForm()">&times;</button>
-                                </div>
-                                <div class="auth-form">
-                                    <div class="form-group">
-                                        <label for="registerUsername">Username</label>
-                                        <input type="text" id="registerUsername" placeholder="Enter username">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="registerEmail">Email</label>
-                                        <input type="email" id="registerEmail" placeholder="Enter email">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="registerPassword">Password</label>
-                                        <input type="password" id="registerPassword" placeholder="Enter password">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="confirmPassword">Confirm Password</label>
-                                        <input type="password" id="confirmPassword" placeholder="Confirm password">
-                                    </div>
-                                    <div class="error-message" id="registerErrorMessage"></div>
-                                    <button class="btn btn-primary btn-full" onclick="handleRegister()">Register</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </nav>
-                <button class="hamburger-btn" id="mobileMenuButton" aria-label="Open menu" aria-expanded="false">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-        </header>
 
-        <main class="main-content">
-            <section class="hero-section">
-                <div class="hero-background"></div>
-                <div class="hero-overlay"></div>
-                <div class="hero-content">
-                    <div class="hero-text">
-                        <h1 class="hero-title">Manage Your Contacts</h1>
-                        <p class="hero-subtitle">Keep all your important contacts organized in one place. Easy to use, secure, and always accessible.</p>
-                    </div>
-                    <div class="hero-actions">
-                        <button class="btn btn-primary btn-lg" onclick="window.location.href='/sign-in'">Get Started</button>
-                    </div>
-                </div>
-            </section>
-        </main>
-    </div>
+<h1 id="title">COP 4331 LAMP Stack Demo</h1>
+
+<div id="loginDiv">
+	<span id="inner-title">If you see this, it means the Actions Workflow worked.</span>
+	<input type="text" id="loginName" placeholder="Username" /><br />
+	<input type="password" id="loginPassword" placeholder="Password"/><br />
+	<button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Do It </button>
+	<span id="loginResult"></span>
+</div>
+
 </body>
 </html>
