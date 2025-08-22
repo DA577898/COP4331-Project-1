@@ -4,7 +4,7 @@
     $searchResults = "";
     $searchCount   = 0;
 
-    $conn = new mysqli("localhost", "root", "team5Password", "COP4331");
+    $conn = new mysqli("localhost", "team20", "team5Password", "COP4331");
     if ($conn->connect_error) 
 	{
 		returnWithError( $conn->connect_error );
