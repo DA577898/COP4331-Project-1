@@ -27,9 +27,9 @@ $conn = new mysqli("localhost", "root", "team5Password", "COP4331"); // $conn = 
     else{ // inserting new row into database. Database schema is not completed yet, so change Column names accordingly once that's finished. VALUES (?, ?, ?, ?, ?) are placeholders
         
         $stmt = $conn->prepare(
-            "INSERT INTO Contacts (userId, firstName, lastName, email, phoneNumber) VALUES (?, ?, ?, ?, ?)"
+            "INSERT INTO Contacts (FirstName, LastName, Email, Phone, UserID) VALUES (?, ?, ?, ?, ?)"
         );
-        $stmt->bind_param("issss", $userId, $firstName, $lastName, $email, $phoneNumber); // this binds the variables to the placeholders
+        $stmt->bind_param("ssssi", $firstName, $lastName, $email, $phoneNumber, $userId); // this binds the variables to the placeholders
         $stmt->execute();
 
         // to return the value generated for an AUTO_INCREMENT column (https://www.php.net/manual/en/mysqli.insert-id.php)

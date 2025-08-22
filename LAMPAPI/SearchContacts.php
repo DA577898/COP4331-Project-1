@@ -27,4 +27,47 @@
 		$stmt->execute();
         $result = $stmt->get_result();
 
-    }
+		while ($row = $result->fetch_assoc()) {
+
+            if ($searchCount > 0) {
+                $searchResults .= ",";
+            }
+            $searchCount++;
+            $searchResults .= '{"contactId":"' . $row["contactId"] . '","firstName":"' . $row["firstName"] . '","lastName":"' . $row["l"] . '","email":"' . $row["email"] . '","phoneNumber":"' . $row["phoneNumber"] . '"}';
+        }
+
+        if ($searchCount == 0) {
+            returnWithError("No Records Found");
+        } else {
+            returnWithInfo("[" . $searchResults . "]");
+        }
+        $stmt->close();
+        $conn->close();
+
+	    sendResultInfoAsJson(json_encode(["results" => $results, "error" => ""]));
+        }
+
+       function getRequestInfo()
+	{
+		return json_decode(file_get_contents('php://input'), true);
+	}
+
+	function sendResultInfoAsJson( $obj )
+	{
+		header('Content-type: application/json');
+		echo $obj;
+	}
+	
+	function returnWithError( $err )
+	{
+		$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
+		sendResultInfoAsJson( $retValue );
+	}
+	
+	function returnWithInfo( $searchResults )
+	{
+		$retValue = '{"results":[' . $searchResults . '],"error":""}';
+		sendResultInfoAsJson( $retValue );
+	}
+	
+?>
