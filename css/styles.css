@@ -137,6 +137,32 @@ a:hover {
     flex-wrap: wrap;
 }
 
+/* Mobile nav improvements */
+@media (max-width: 768px) {
+    .header-content {
+        gap: var(--space-3);
+    }
+    .nav-menu {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .nav-links {
+        flex: 1;
+        justify-content: flex-start;
+    }
+    .nav-actions {
+        flex: 1;
+        justify-content: flex-end;
+        gap: var(--space-2);
+    }
+    .nav-actions .btn {
+        padding: 0.5rem 0.75rem;
+        min-width: auto;
+    }
+}
+
 .logo-section {
     display: flex;
     align-items: center;
@@ -406,6 +432,9 @@ a:hover {
 }
 
 @media (max-width: 768px) {
+    .header {
+        height: auto;
+    }
     :root {
         --container-padding: var(--space-4);
     }
@@ -451,6 +480,12 @@ a:hover {
     .btn {
         width: 100%;
         max-width: none;
+    }
+    /* Reduce hero side margins/radius on small screens */
+    .hero-section {
+        margin-left: var(--space-4);
+        margin-right: var(--space-4);
+        border-radius: 16px;
     }
 }
 
@@ -669,15 +704,23 @@ a:hover {
     justify-content: center;
 }
 
+.error-message.success {
+    color: #059669;
+    background-color: rgba(5, 150, 105, 0.1);
+    border-color: rgba(5, 150, 105, 0.2);
+}
+
 .error-message:empty {
     display: none;
 }
 
 @media (max-width: 768px) {
     .auth-form-popup {
-        right: auto;
-        left: 0;
-        min-width: 300px;
+        right: 0;
+        left: auto;
+        width: calc(100vw - var(--space-4) * 2);
+        max-width: 420px;
+        min-width: 0;
         margin-top: var(--space-2);
     }
     
