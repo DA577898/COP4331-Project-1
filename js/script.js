@@ -214,6 +214,23 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
+// Mobile hamburger menu toggle
+document.addEventListener('DOMContentLoaded', function() {
+    const header = document.querySelector('.header');
+    const appContainer = document.querySelector('.app-container');
+    const btn = document.getElementById('mobileMenuButton');
+    if (!btn || !appContainer) return;
+    btn.addEventListener('click', function() {
+        const isOpen = appContainer.classList.toggle('mobile-menu-open');
+        btn.classList.toggle('active', isOpen);
+        btn.setAttribute('aria-expanded', String(isOpen));
+        btn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+        if (!isOpen) {
+            closeAllPopups();
+        }
+    });
+});
+
 // Function to setup auto-hide error messages on blur (tab out)
 function setupErrorAutoHide(inputId, errorMessageId) {
     const input = document.getElementById(inputId);
