@@ -1,98 +1,80 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+$inData = getRequestInfo(); // reading the JSON into variables
 
-$raw = file_get_contents('php://input');
-if ($raw === false || $raw === '') {
-    returnWithError("Empty request body");
-    exit;
+/* Sample JSON from frontend
+{
+  "userId": 17,
+  "firstName": "Anju",
+  "lastName": "Thomas",
+  "email": "anju@gmail.com",
+  "phoneNumber": "555555555"
 }
-
-$inData = json_decode($raw, true);
-if ($inData === null) {
-    returnWithError("Invalid JSON: " . json_last_error_msg());
-    exit;
-}
-
-foreach (["userId","firstName","lastName","email","phoneNumber"] as $k) {
-    if (!array_key_exists($k, $inData)) {
-        returnWithError("Missing field: $k");
-        exit;
-    }
-}
-
-$userId      = (int)$inData["userId"];
-$firstName   = $inData["firstName"];
-$lastName    = $inData["lastName"];
+*/
+// php variables. inData is an PHP assocative array. keys come from frontend. Rename based on frontend naming accordingly
+$userId = $inData["userId"];
+$firstName = $inData["firstName"];
+$lastName = $inData["lastName"];
 $phoneNumber = $inData["phoneNumber"];
-$email       = $inData["email"];
+$email = $inData["email"];
 
-$conn = new mysqli("localhost", "team20", "team5Password", "COP4331");
-if ($conn->connect_error) {
-    returnWithError("DB connect failed: " . $conn->connect_error);
-    exit;
-}
+$conn = new mysqli("localhost", "team20", "team5Password", "COP4331"); // $conn = a MySQLi object, insert_id is a built in property
 
-$stmt = $conn->prepare(
-    "INSERT INTO Contacts (FirstName, LastName, Email, Phone, UserID)
-     VALUES (?, ?, ?, ?, ?)"
-);
-if (!$stmt) {
-    returnWithError("Prepare failed: " . $conn->error);
-    $conn->close();
-    exit;
-}
+    // checking the connection
+    if( $conn->connect_error ){
+            returnWithError( $conn->connect_error );
+    }
+    else{ // inserting new row into database. Database schema is not completed yet, so change Column names accordingly once that's finished. VALUES (?, ?, ?, ?, ?) are placeholders
 
-if (!$stmt->bind_param("ssssi", $firstName, $lastName, $email, $phoneNumber, $userId)) {
-    returnWithError("Bind failed: " . $stmt->error);
-    $stmt->close();
-    $conn->close();
-    exit;
-}
+        $stmt = $conn->prepare(
+            "INSERT INTO Contacts (FirstName, LastName, Email, Phone, UserID) VALUES (?, ?, ?, ?, ?)"
+        );
+        $stmt->bind_param("ssssi", $firstName, $lastName, $email, $phoneNumber, $userId); // this binds the variables to the placeholders
+        $stmt->execute();
 
-if (!$stmt->execute()) {
+        // to return the value generated for an AUTO_INCREMENT column (https://www.php.net/manual/en/mysqli.insert-id.php)
+        $contactId = $conn->insert_id;
 
-    returnWithError("Execute failed: " . $stmt->error);
-    $stmt->close();
-    $conn->close();
-    exit;
-}
+        $stmt->close();
+        $conn->close();
 
-$contactId = $conn->insert_id;
+        // building a JSON response string,
+        // example
+        /* 
+        {
+            "id": 12,
+            "firstName": "Jane",
+            "lastName": "Smith",
+            "phoneNumber": "5555555555",
+            "email": "testing123@gmail.com"
+            "error": ""
+        }
+        */
+        returnWithInfo($contactId, $firstName, $lastName, $phoneNumber, $email);
 
-$stmt->close();
-$conn->close();
+    }
 
-returnWithInfo($contactId, $firstName, $lastName, $phoneNumber, $email);
+    function getRequestInfo() // decoding the json with this function. converts JSON string into a PHP associative array
+	{
+		return json_decode(file_get_contents('php://input'), true);
+	}
+    // getReqestInfo and sendResultInfoAsJson should be present in every api endpoint
+    function sendResultInfoAsJson( $obj )
+	{
+		header('Content-type: application/json');
+		echo $obj;
+	}
 
+    function returnWithError( $err )
+	{
+		$retValue = '{"userId":0,"firstName":"","lastName":"", "phoneNumber": "", "email": "", "error":"' . $err . '"}';
+		sendResultInfoAsJson( $retValue );
+	}
 
+	function returnWithInfo( $contactId, $firstName, $lastName, $phoneNumber, $email )
+	{
+		$retValue = '{"contactId":' . $contactId . ', "firstName":"' . $firstName . '", "lastName":"' . $lastName . '", "phoneNumber":"' . $phoneNumber . '", "email":"' . $email . '", "error":""}';
+		sendResultInfoAsJson( $retValue );
+	}
 
-function sendResultInfoAsJson($obj) {
-    header('Content-type: application/json');
-    echo $obj;
-}
-
-function returnWithError($err) {
-    sendResultInfoAsJson(json_encode([
-        "userId" => 0,
-        "firstName" => "",
-        "lastName" => "",
-        "phoneNumber" => "",
-        "email" => "",
-        "error" => $err
-    ]));
-}
-
-function returnWithInfo($contactId, $firstName, $lastName, $phoneNumber, $email) {
-    sendResultInfoAsJson(json_encode([
-        "contactId" => (int)$contactId,
-        "firstName" => $firstName,
-        "lastName" => $lastName,
-        "phoneNumber" => $phoneNumber,
-        "email" => $email,
-        "error" => ""
-    ]));
-}
 ?>
