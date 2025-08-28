@@ -59,11 +59,11 @@ td button:nth-child(1):hover{
     background-color: #016c93;
 }
 
-td button:nth-child(2){ /* this is the delete button */
+td button:nth-child(2){ 
     background-color: #f80000;
 }
 
-td button:nth-child(2):hover{ /* this is the delete button */
+td button:nth-child(2):hover{ 
     background-color: #bf0404;
 }
 
@@ -165,4 +165,11 @@ td{
 
 ::-webkit-scrollbar-thumb{
     box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+#logout-button{
+    padding: 10px 20px;
+    color: white;
+    background-color: #0298cfbb;
+    margin-left: 20px;
 }
