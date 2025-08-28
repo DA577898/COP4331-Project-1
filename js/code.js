@@ -1,3 +1,5 @@
+// Ignore this page, please only use as a reference
+
 const urlBase = 'http://COP4331-5.com/LAMPAPI';
 const extension = 'php';
 
