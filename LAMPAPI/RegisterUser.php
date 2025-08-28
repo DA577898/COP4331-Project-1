@@ -52,7 +52,7 @@ if (strlen($login) < 3 || strlen($login) > 50) {
 }
 
 if (strlen($password) < 8 || strlen($password) > 50) {
-    returnWithError("Password must be between 8 and 50characters");
+    returnWithError("Password must be between 8 and 50 characters");
     exit;
 }
 
