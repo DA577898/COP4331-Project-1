@@ -9,12 +9,13 @@ body{
 }
 
 .table{
-    width: 100%
+    width: 100%;
 }
 
 .table-header{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 1350px; 
     align-items: center;
     padding: 20px;
     background-color: rgb(240, 240, 240);
@@ -51,18 +52,31 @@ button{
 }
 
 td button:nth-child(1){ /* this is the edit button */
-    background-color: #0298cf
+    background-color: #0298cfbb;
+}
+
+td button:nth-child(1):hover{
+    background-color: #016c93;
 }
 
 td button:nth-child(2){ /* this is the delete button */
     background-color: #f80000;
 }
 
+td button:nth-child(2):hover{ /* this is the delete button */
+    background-color: #bf0404;
+}
+
 .add-contact-button{
     padding: 10px 20px;
     color: white;
-    background-color: #0298cf
+    background-color: #0298cfbb;
 }
+
+.add-contact-button:hover{
+    background-color: #016c93;
+}
+
 
 .table-section{
     height: 650px;
@@ -122,19 +136,23 @@ td{
 
 .pagination div{
     padding: 10px;
-    border: 2px solid #d5d0d0;
+    border: 2px solid #e7e1e1;
     height: 40px;
     width: 40px;
     border-radius: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #0298cf;
+    background-color: #0298cfbb;
     color: #ffffff;
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.618);
     margin: 0 5px;
     cursor: pointer;
 }
+.pagination div:hover{
+    background-color: #016c93;
+}
+
 
 ::-webkit-scrollbar{ /* this adds some styling to the scrollbar, need to do more research */
     height: 5px;
