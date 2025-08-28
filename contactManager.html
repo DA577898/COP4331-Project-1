@@ -1,26 +1,51 @@
 <!DOCTYPE html>
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <!--to get the poppins font-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      crossorigin="anonymous" referrerpolicy="no-referrer" /> <!--this is for the edit and delete buttons-->
     <link href="css/contactManager.css" rel="stylesheet">
-    <title>Contact Manager</title>
 </head>
 <body>
-    <h3>Contacts</h3>
 
-    <table id="table-border">
-        <tr id="table-column-names">
-            <th>First Name</th> <!--this is a table header element, it's bold by default-->
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Phone Number</th>
-            <th>Actions</th>
-        </tr>
+    <div class="table">
+        <div class="table-header">
+            <p>Contacts</p>
+            <div>
+                <input placeholder="contact name"/>
+                <button class="add-contact-button">+ Add New</button>
+            </div>
+        </div>
+    </div>    
 
-        <tr id="row-cells">
-            <td>Jane</td> <!--this is a table data element-->
-            <td>Smith</td>
-            <td>jane@gmail.com</td>
-            <td>955-555-555</td>
-            <td>Edit and Delete</td>
-        </tr>
-    </table>
+    <div class="table-section">
+        <table id="table-border">
+            <thead>
+                <tr id="table-column-names">
+                    <th>No.</th>
+                    <th>First Name</th> <!--this is a table header element, it's bold by default-->
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            
+
+            <tr id="row-cells">
+                <td>1</td>
+                <td>Jane</td> <!--this is a table data element-->
+                <td>Smith</td>
+                <td>jane@gmail.com</td>
+                <td>955-555-555</td>
+                <td>
+                    <button><i class="fa-solid fa-pen-to-square"></i></button>/
+                    <button><i class="fa-solid fa-trash"></i></button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    
 </body>
