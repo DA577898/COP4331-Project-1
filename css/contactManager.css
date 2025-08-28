@@ -37,11 +37,25 @@ input {
     color: #0298cf
 }
 
+::placeholder{
+    color: #0298cf;
+}
+
 button{
     outline: none;
     border: none;
     border-radius: 6px;
     cursor: pointer;
+    padding: 10px;
+    color: #ffffff;
+}
+
+td button:nth-child(1){ /* this is the edit button */
+    background-color: #0298cf
+}
+
+td button:nth-child(2){ /* this is the delete button */
+    background-color: #f80000;
 }
 
 .add-contact-button{
@@ -53,6 +67,40 @@ button{
 .table-section{
     height: 650px;
     overflow: auto;
+}
+
+table{
+    width: 100%;
+    table-layout: fixed;
+    min-width: 1000px;
+    border-collapse: collapse;
+}
+
+thead th{
+    position: sticky;
+    top: 0;
+    background-color: #f6f9fc;
+    color: #8493a5;
+    font-size: 15px;
+}
+
+th, td{ /*applies to table headers and table data cell */
+    border-bottom: 1px solid #dddddd;
+    padding: 10px 20px;
+    word-break: break-all; /* breaks to avoid overflow in the cell container */
+    text-align: center;
+}
+
+/* from the tutorial, omitted img styling here, if we end up including it, return to 6:42 */
+
+tr:hover td{
+    color: #0298cf;
+    cursor: pointer;
+    background-color: #f6f9fc;
+}
+
+td{
+    background-color: white;
 }
 
 
