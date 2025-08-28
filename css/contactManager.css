@@ -1,13 +1,65 @@
-#table-border{
-    background-color: rgb(231, 120, 139);
+body{
+    font-family: 'Poppins', sans-serif;
 }
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.table{
+    width: 100%
+}
+
+.table-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: rgb(240, 240, 240);
+}
+
+.table-header p {
+    color: black;
+}
+
+#table-border{
+    background-color: rgb(225, 224, 224);
+}
+
+input {
+    padding: 10px 20px;
+    margin: 0 10px;
+    outline: none;
+    border: 1px solid #0298cf;
+    border-radius: 6px;
+    color: #0298cf
+}
+
+button{
+    outline: none;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.add-contact-button{
+    padding: 10px 20px;
+    color: white;
+    background-color: #0298cf
+}
+
+.table-section{
+    height: 650px;
+    overflow: auto;
+}
+
 
 #table-column-names{
     width: 100;
 }
 
 #row-cells{
-    background-color: pink;
-    align: center;
+    background-color: rgb(240, 240, 240);
 }
-
