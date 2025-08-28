@@ -1,0 +1,13 @@
+#table-border{
+    background-color: rgb(231, 120, 139);
+}
+
+#table-column-names{
+    width: 100;
+}
+
+#row-cells{
+    background-color: pink;
+    align: center;
+}
+
