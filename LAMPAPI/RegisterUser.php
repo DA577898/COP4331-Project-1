@@ -3,19 +3,19 @@
 
 $inData = getRequestInfo(); // reading the JSON into variables
 
-$required_fields = ["FirstName", "LastName", "Login", "Password"];
-$missing_fields = [];
+// $required_fields = ["FirstName", "LastName", "Login", "Password"];
+// $missing_fields = [];
 
-foreach ($required_fields as $field) {
-    if ((!isset($inData[$field])) || (trim($inData[$field]) === '' && is_string($inData[$field]))) {
-        $missing_fields[] = $field;
-    }
+// foreach ($required_fields as $field) {
+//     if ((!isset($inData[$field])) || (trim($inData[$field]) === '' && is_string($inData[$field]))) {
+//         $missing_fields[] = $field;
+//     }
 
-    if (count($missing_fields) > 0) {
-        returnWithError("Missing or empty fields: " . implode(", ", $missing_fields));
-        exit();
-    }
-}
+//     if (count($missing_fields) > 0) {
+//         returnWithError("Missing or empty fields: " . implode(", ", $missing_fields));
+//         exit();
+//     }
+// }
     // Extract and sanitize input data
 $FirstName = trim($inData["FirstName"]);
 $LastName = trim($inData["LastName"]);
@@ -27,29 +27,29 @@ $Password = trim($inData["Password"]);
 
 // constraints on login like special symbols?? 
 
-if (strlen($firstName) < 1 || strlen($firstName) > 50) {
+if (strlen($FirstName) < 1 || strlen($FirstName) > 50) {
     returnWithError("First name must be between 1 and 50 characters");
     exit;
 }
 
-if (strlen($lastName) < 1 || strlen($lastName) > 50) {
+if (strlen($LastName) < 1 || strlen($LastName) > 50) {
     returnWithError("Last name must be between 1 and 50 characters");
     exit;
 }
 
-if (strlen($login) < 3 || strlen($login) > 50) {
+if (strlen($Login) < 3 || strlen($Login) > 50) {
     returnWithError("Login must be between 3 and 50 characters");
     exit;
 }
 
-if (strlen($password) < 8 || strlen($password) > 50) {
+if (strlen($Password) < 8 || strlen($Password) > 50) {
     returnWithError("Password must be between 8 and 50characters");
     exit;
 }
 
 
 
-$conn = new mysqli("localhost", "team20", "team5Password", "COP4331"); // $conn = a MySQLi object, insert_id is a built in property
+$conn = new mysqli("localhost", "team20", "team5Password", "COP4331"); 
 
     // checking the connection
     if( $conn->connect_error ){
