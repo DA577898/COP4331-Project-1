@@ -3,15 +3,6 @@
 
 $inData = getRequestInfo(); // reading the JSON into variables
 
-/* Sample JSON from frontend
-{
-  "userId": 17,
-  "firstName": "Anju",
-  "lastName": "Thomas",
-  "email": "anju@gmail.com",
-  "phoneNumber": "555555555"
-}
-*/
 $required_fields = ["FirstName", "LastName", "Login", "Password"];
 $missing_fields = [];
 
@@ -55,8 +46,6 @@ if (strlen($password) < 8 || strlen($password) > 50) {
     returnWithError("Password must be between 8 and 50characters");
     exit;
 }
-
-
 
 
 
