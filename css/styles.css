@@ -1,140 +1,227 @@
+/* please use this file for our css styling, styles1.css will be deleted */
+
+*
+{
+    box-sizing: border-box;
+}
+
 body 
 {
-    background-color: #707070;
+    background-color: rgb(240, 234, 214);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: "Montserrat", sans-serif;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
 }
 
-#title 
+h1
 {
-    font-size: 40px;
+    font-weight: bold;
+    margin: 0;
+}
+
+
+
+span
+{
+    font-size: 12px;
+}
+
+a
+{
+    color: #333;
+    font-size: 14px;
+    text-decoration: none;
+    margin: 15px 0;
+}
+
+button
+{
+    border-radius: 20px;
+    border: 1px solid rgb(144, 213, 255);
+    background-color: rgb(144, 213, 255);
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+}
+
+button:hover
+{
+    background-color: navy;
+    color: rgb(144, 213, 255);
+    border: 1px solid rgb(144, 213, 255);
+    cursor: pointer;
+}
+
+button.ghost
+{
+    background-color: transparent;
+    border-color: #fff;
+}
+
+form
+{
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 50px;
+    height: 100%;
+    text-align: center;
+}
+
+input
+{
+    background-color: #eee;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
     width: 100%;
-    margin: 2% 5%;
-    text-align: center;
-    font-family: 'Ubuntu', sans-serif;
-    color: #FFFFFF;
 }
 
-#loginDiv
+.container
 {
-    font-size: 30px;
-    width: 70%;
-    margin-left: 15%;
-    padding: 25px;
-    background-color: #b2b2b2;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    position: relative;
+    overflow: hidden;
+    width: 1000px;
+    max-width: 100%;
+    min-height: 400px;
 }
 
-#loggedInDiv
+.form-container
 {
-    font-size: 30px;
-    width: 70%;
-    margin-left: 15%;
-    padding: 25px;
-    background-color: #b2b2b2;
+    position: absolute;
+    top: 0;
+    height: 100%;
 }
 
-#accessUIDiv
+.sign-in-container
 {
-    font-size: 30px;
-    width: 70%;
-    margin-left: 15%;
-    padding: 25px;
-    background-color: #b2b2b2;
-}
-
-.buttons
-{
-    font-size: 30px;
-    border-radius: 25px;
+    left: 0;
     width: 50%;
-    margin-left: 25%;
-    font-family: 'Ubuntu', sans-serif;
+    z-index: 2;
 }
 
-.buttons:hover{
-    background-color: #00d5124f;
-    color: #FFFFFF;
-    opacity: 50%;
+.container.right-panel-active .sign-in-container{
+    transform: translateX(100%)
 }
 
-#loginName
+.register-container
 {
-	font-size: 30px;
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+    
 }
-#loginPassword
+
+.container.right-panel-active .register-container
 {
-	font-size: 30px;
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    
 }
-#searchText
+
+
+
+.overlay-container
 {
-	font-size: 30px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform 0.6s ease-in-out;
+    z-index: 100;
 }
-#colorText
+
+.container.right-panel-active .overlay-container
 {
-	font-size: 30px;
+    transform: translateX(-100%);
 }
 
-input[type="text"],input[type="password"]{
-    border-radius: 25px;
+.overlay
+{
+    background: rgb(144, 213, 255);
+    background: -webkit-linear-gradient(to right, rgb(144, 213, 255), rgb(12, 97, 158));
+    background: linear-gradient(to right, rgb(144, 213, 255), rgb(12, 97, 158));
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 0;
+    color: #fff;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transition: transform 0.6s ease-in-out;
+    transform: translateX(0);
+}
+
+.container.right-panel-active .overlay
+{
+    transform: translateX(50%);
+}
+
+.overlay-panel
+{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 40px;
     text-align: center;
-    width: 80%;
-    margin-left: 10%;
-    margin-bottom: 2%;
-    font-family: 'Ubuntu', sans-serif;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    transform: translateX(0);
 }
 
-#inner-title{
-    display: inline-block;
-    font-size: 0.8em;
-    width: 90%;
-    text-align: center;
-    margin-left: 5%;
-    margin-bottom: 2%;
-    font-family: 'Ubuntu', sans-serif;
-    color: #95060a;
+
+
+.container.right-panel-active .overlay-left
+{
+    transform: translateX(0);
 }
 
-#loginResult{
-    display: inline-block;
-    font-size: 0.8em;
-    width: 90%;
-    text-align: center;
-    margin-left: 5%;
-    margin-bottom: 2%;
-    font-family: 'Ubuntu', sans-serif;
-    color: #95060a;
+.overlay-right
+{
+    right: 0;
+    transform: translateX(0);
 }
 
-#userName{
-    display: inline-block;
-    width: 80%;
-    margin-left: 10%;
-    text-align: center;
+
+.social-container
+{
+    margin: 20px 0;
 }
 
-#logoutButton{
-    width: 20%;
-    margin-left: 40%;
+.social-container a
+{
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+    height: 40px;
+    width: 40px;
 }
 
-select{
-    width: 30%;
-    margin-left: 35%;
-    margin-top: 2%;
-    font-size: 0.75em;
-    font-family: 'Ubuntu', sans-serif;
-}
-
-#colorSearchResult{
-    display: none;
-}
-
-#colorAddResult{
-    display: inline-block;
-    font-size: 0.8em;
-    width: 90%;
-    text-align: center;
-    margin-left: 5%;
-    margin-top: 2%;
-    margin-bottom: 1%;
-    font-family: 'Ubuntu', sans-serif;
-    color: #95060a;
+#btn-to-contact-manager{
+    margin-bottom: 50px;
 }
