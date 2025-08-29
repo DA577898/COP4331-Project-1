@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <html> <!-- This is a comment in HTML, Please feel free to change anything here - Anju-->
 <head>
 	<meta charset="utf-8"> 
@@ -8,9 +9,26 @@
 	<script type="text/javascript" src="js/script.js"></script>
     <link href="css/styles.css" rel="stylesheet">	
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-</head>
-<body>
+=======
+<!DOCTYPE html>
 
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login or Register</title>
+    <link rel="stylesheet" href="css/styles.css">
+>>>>>>> 537c4c6f6f6e7e8bfd91eda35f8b01cd19c39ebc
+</head>
+
+<body>
+    <button onclick="window.location.href='contactManager.html'" id="btn-to-contact-manager">Contact Manager</button>
+    <!--Temporary link to contact manager page. we will set it up so that after user logs in or registers, they will automatically go to the contact manager page-->
+    
+    <div class="container" id="container">
+
+<<<<<<< HEAD
 <h1 id="title">Team 20</h1>
 
 <div id="loginDiv">
@@ -22,5 +40,53 @@
 </div>
 
 	<a href="contactManager.html">This is a link</a> <!-- This is the connection to the contactManager.html-->
+=======
+        <div class ="form-container register-container">
+            <form action="#">
+                <br>
+                <h1>Create Account</h1>
+                <br>
+                <input type="text" placeholder="First Name">
+                <input type="text" placeholder="Last Name">
+                <input type="email" placeholder="Email">
+                <input type="password" placeholder="Password">
+                <br>
+                <button>Register</button>
+            </form>
+        </div>
+
+        <div class="form-container sign-in-container">
+            <form action="#">
+                <br>
+                <h1>Sign In</h1>
+                <br>
+                <input type="email" placeholder="Email">
+                <input type="password" placeholder="Password">
+                <br>
+                <button>Sign In</button>
+
+            </form>
+        </div>
+
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Welcome Back</h1>
+                    <br>
+                    <button class="ghost" id="signIn">Sign In</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>First Time?</h1>
+                    <br>
+                    <button class="ghost" id="register">Register</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+>>>>>>> 537c4c6f6f6e7e8bfd91eda35f8b01cd19c39ebc
 </body>
+
 </html>
+
+
