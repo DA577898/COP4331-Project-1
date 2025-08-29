@@ -1,26 +1,26 @@
 <?php
 
-$inData = getRequestInfo(); // reading the JSON into variables
+    $inData = getRequestInfo(); // reading the JSON into variables
 
-/* Sample JSON from frontend
-{
-  "userId": 17,
-  "firstName": "Anju",
-  "lastName": "Thomas",
-  "email": "anju@gmail.com",
-  "phoneNumber": "555555555"
-}
-*/
-// php variables. inData is an PHP assocative array. keys come from frontend. Rename based on frontend naming accordingly
-$userId = $inData["userId"];
-$firstName = $inData["firstName"];
-$lastName = $inData["lastName"];
-$phoneNumber = $inData["phoneNumber"];
-$email = $inData["email"];
+    /* Sample JSON from frontend
+    {
+    "userId": 17,
+    "firstName": "Anju",
+    "lastName": "Thomas",
+    "email": "anju@gmail.com",
+    "phoneNumber": "555555555"
+    }
+    */
+    // php variables. inData is an PHP assocative array. keys come from frontend. Rename based on frontend naming accordingly
+    $userId = $inData["userId"];
+    $firstName = $inData["firstName"];
+    $lastName = $inData["lastName"];
+    $phoneNumber = $inData["phoneNumber"];
+    $email = $inData["email"];
 
-$conn = new mysqli("localhost", "team20", "team5Password", "COP4331"); // $conn = a MySQLi object, insert_id is a built in property
+    $conn = new mysqli("localhost", "team20", "team5Password", "COP4331"); // $conn = a MySQLi object, insert_id is a built in property
 
-    // checking the connection
+        // checking the connection
     if( $conn->connect_error ){
             returnWithError( $conn->connect_error );
     }
