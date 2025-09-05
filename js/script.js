@@ -24,6 +24,8 @@ document.querySelector("#buttonRegister").addEventListener("click", () =>
     const login = document.getElementById("emailRegister").value;
     const password = document.getElementById("passwordRegister").value;
 
+    console.log("Sending data:", {firstName, lastName, login, password}); // adding additional checks to see which variables are being sent to form the json body
+
     fetch("/LAMPAPI/RegisterUser.php", 
     {
         method: "POST",
