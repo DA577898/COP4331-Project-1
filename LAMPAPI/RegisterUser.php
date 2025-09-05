@@ -17,10 +17,10 @@ $inData = getRequestInfo(); // reading the JSON into variables
 //     }
 // }
     // Extract and sanitize input data
-$Firstname = trim($inData["Firstname"]);
-$Lastname = trim($inData["Lastname"]);
-$Login = trim($inData["Login"]);
-$Password = trim($inData["Password"]);
+$Firstname = trim($inData["firstName"]);
+$Lastname = trim($inData["lastName"]);
+$Login = trim($inData["login"]);
+$Password = trim($inData["password"]);
 
 // checking length constraints and other error handling 
 
