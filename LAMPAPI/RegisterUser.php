@@ -29,22 +29,22 @@ $Password = trim($inData["password"]);
 
 if (strlen($Firstname) < 1 || strlen($Firstname) > 50) {
     returnWithError("First name must be between 1 and 50 characters");
-    exit;
+    exit();
 }
 
 if (strlen($Lastname) < 1 || strlen($Lastname) > 50) {
     returnWithError("Last name must be between 1 and 50 characters");
-    exit;
+    exit();
 }
 
 if (strlen($Login) < 3 || strlen($Login) > 50) {
     returnWithError("Login must be between 3 and 50 characters");
-    exit;
+    exit();
 }
 
 if (strlen($Password) < 8 || strlen($Password) > 50) {
     returnWithError("Password must be between 8 and 50characters");
-    exit;
+    exit();
 }
 
 

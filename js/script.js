@@ -21,7 +21,7 @@ document.querySelector("#buttonRegister").addEventListener("click", () =>
 {
     const firstName = document.getElementById("firstNameRegister").value;
     const lastName = document.getElementById("lastNameRegister").value;
-    const email = document.getElementById("emailRegister").value;
+    const login = document.getElementById("emailRegister").value;
     const password = document.getElementById("passwordRegister").value;
 
     fetch("/LAMPAPI/RegisterUser.php", 
@@ -35,7 +35,7 @@ document.querySelector("#buttonRegister").addEventListener("click", () =>
         ({
             firstName: firstName,
             lastName: lastName,
-            email: email,
+            login: login,
             password: password,
         })
     })
@@ -60,7 +60,7 @@ document.querySelector("#buttonRegister").addEventListener("click", () =>
 // Sign in JSON
 document.querySelector("#buttonSignIn").addEventListener("click", () => 
 {
-    const email = document.getElementById("emailSignIn").value;
+    const login = document.getElementById("emailSignIn").value;
     const password = document.getElementById("passwordSignIn").value;
 
     fetch("/LAMPAPI/LoginUser.php",
@@ -72,7 +72,7 @@ document.querySelector("#buttonSignIn").addEventListener("click", () =>
         },
         body: JSON.stringify
         ({
-            email: email,
+            login: email,
             password: password,
         })
     })
