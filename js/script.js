@@ -41,11 +41,11 @@ document.querySelector("#buttonRegister").addEventListener("click", () =>
     })
     .then(response => {
         console.log("Response status:", response.status); // adding debugging statements
-        response.json()
+        return response.json()
     })
     .then(data => 
     {
-        console.log("Response status:", response.status); // adding debugging statements
+        console.log("Response status:", data); // adding debugging statements
         if (data.error === "") 
         {
             console.log("Registration Successful");
@@ -76,13 +76,13 @@ document.querySelector("#buttonSignIn").addEventListener("click", () =>
         },
         body: JSON.stringify
         ({
-            login: email,
+            login: login,
             password: password,
         })
     })
     .then(response => {
         console.log("Response status:", response.status); // adding debugging statements
-        response.json()
+        return response.json()
     })
     .then(data =>
     {
