@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com"> <!--to get the poppins font-->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -7,6 +8,10 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
       crossorigin="anonymous" referrerpolicy="no-referrer" /> <!--this is for the edit and delete buttons-->
     <link href="css/contactManager.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Manager</title>
+    <script src="js/contactManager.js"></script>
+    <meta charset="UTF-8">
 </head>
 <body>
 
@@ -34,65 +39,9 @@
             </thead>
             
             <!--I hard coded the data values for demo purposes, need to delete when javascript functionality is present-->
-            <tr id="row-cells">
-                <td>1</td>
-                <td>Jane</td> <!--this is a table data element-->
-                <td>Smith</td>
-                <td>jane@gmail.com</td>
-                <td>955-555-5554</td>
-                <td>
-                    <button><i class="fa-solid fa-pen-to-square"></i></button>
-                    <button><i class="fa-solid fa-trash"></i></button>
-                </td>
-            </tr>
-
-            <tr id="row-cells">
-                <td>2</td>
-                <td>Rani</td> <!--this is a table data element-->
-                <td>Anand</td>
-                <td>anand@gmail.com</td>
-                <td>333-333-3333</td>
-                <td>
-                    <button><i class="fa-solid fa-pen-to-square"></i></button>
-                    <button><i class="fa-solid fa-trash"></i></button>
-                </td>
-            </tr>
-
-            <tr id="row-cells">
-                <td>3</td>
-                <td>Kevin</td> <!--this is a table data element-->
-                <td>Song</td>
-                <td>song@gmail.com</td>
-                <td>755-755-7545</td>
-                <td>
-                    <button><i class="fa-solid fa-pen-to-square"></i></button>
-                    <button><i class="fa-solid fa-trash"></i></button>
-                </td>
-            </tr>
-
-            <tr id="row-cells">
-                <td>4</td>
-                <td>Lady</td> <!--this is a table data element-->
-                <td>Gaga</td>
-                <td>littlemonsters@gmail.com</td>
-                <td>222-222-2222</td>
-                <td>
-                    <button><i class="fa-solid fa-pen-to-square"></i></button>
-                    <button><i class="fa-solid fa-trash"></i></button>
-                </td>
-            </tr>
-
-            <tr id="row-cells">
-                <td>5</td>
-                <td>David</td> <!--this is a table data element-->
-                <td>Williams</td>
-                <td>jane@gmail.com</td>
-                <td>888-888-8888</td>
-                <td>
-                    <button><i class="fa-solid fa-pen-to-square"></i></button>
-                    <button><i class="fa-solid fa-trash"></i></button>
-                </td>
-            </tr>
+            <tbody id="contactTableBody">
+                <!-- Contact rows will be dynamically populated by JavaScript -->
+            </tbody>
 
             <!--End of the hardcoding -->
         </table>
