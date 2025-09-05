@@ -76,15 +76,19 @@ document.querySelector("#buttonSignIn").addEventListener("click", () =>
             password: password,
         })
     })
-    .then(response => response.json())
+    .then(response => {
+        console.log("Response status:", response.status); // adding debugging statements
+        response.json()
+    })
     .then(data =>
     {
+        console.log("Response data:", data); // adding debugging statements
         if (data.error === "")
         {
             console.log("Login Successful");
         } else 
         {
-            console.log("There was an error");
+            console.log("There was an error", data.error); // showing what the actual error is
         }
     })
     .catch(error => 
