@@ -100,8 +100,8 @@ document.querySelector("#buttonSignIn").addEventListener("click", (e) =>
             console.log("Login Successful");
             // storing the logged in user's credentials into the local storage and setting page to redirect to contact manager
             localStorage.setItem('userId', data.userId);
-            localStorage.setItem('firstName', data.FirstName);
-            localStorage.setItem('lastName', data.LastName);
+            localStorage.setItem('firstName', data.firstName);
+            localStorage.setItem('lastName', data.lastName);
             window.location.href = "contactManager.html"
         } else 
         {
