@@ -95,4 +95,3 @@ document.querySelector("#buttonSignIn").addEventListener("click", () =>
 });
 
 
-// End of code being used in index.html
