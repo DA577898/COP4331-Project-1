@@ -101,5 +101,5 @@ document.getElementById('logout-button').addEventListener('click', () => {
     localStorage.removeItem('userId');
     localStorage.removeItem('firstName');
     localStorage.removeItem('lastName');
-    window.location.href('index.html');
+    window.location.href = 'index.html';
 });
