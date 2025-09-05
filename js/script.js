@@ -52,6 +52,11 @@ document.querySelector("#buttonRegister").addEventListener("click", (e) =>
         if (data.error === "") 
         {
             console.log("Registration Successful");
+            localStorage.setItem('userId', data.userId);
+            localStorage.setItem('firstName', data.firstName);
+            localStorage.setItem('firstName', data.firstName);
+            localStorage.setItem('firstName', data.firstName);
+            window.location.href = "contactManager.html"
         } else
         {
             console.log("There was an error", data.error); // showing what the actual error is
@@ -94,6 +99,12 @@ document.querySelector("#buttonSignIn").addEventListener("click", (e) =>
         if (data.error === "")
         {
             console.log("Login Successful");
+            // storing the logged in user's credentials into the local storage and setting page to redirect to contact manager
+            localStorage.setItem('userId', data.userId);
+            localStorage.setItem('firstName', data.firstName);
+            localStorage.setItem('firstName', data.firstName);
+            localStorage.setItem('firstName', data.firstName);
+            window.location.href = "contactManager.html"
         } else 
         {
             console.log("There was an error", data.error); // showing what the actual error is
