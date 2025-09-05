@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // first making sure that a user is logged in, this information was sent from the local storage in script.js after a user is done logging in / registering
 
     const userId = localStorage.getItem('userId');
+    console.log("Stored userId:", userId, "Type:", typeof userId);
 
     if(!userId){
         window.location.href = 'index.html';
@@ -28,7 +29,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const phoneNumber = document.getElementById('inputPhoneNumber').value;
         
         // this should be stored from login session 
-        // const userId = localStorage.getItem('userId');
+        const userId = localStorage.getItem('userId');
+        console.log("Stored userId:", userId, "Type:", typeof userId);
         
         fetch('/LAMPAPI/CreateContact.php', { 
             method: 'POST',
@@ -51,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log("Contact added successfully");
                 document.getElementById('add-contact-dialog').close();
                 document.querySelector('#add-contact-dialog form').reset(); // Clear form
+                console.log("Sending userId to API:", parseInt(userId));
                 loadContacts(userId);
             } else {
                 // Show error message
