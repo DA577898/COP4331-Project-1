@@ -65,8 +65,9 @@ document.querySelector("#buttonRegister").addEventListener("click", (e) =>
 });
 
 // Sign in JSON
-document.querySelector("#buttonSignIn").addEventListener("click", () => 
+document.querySelector("#buttonSignIn").addEventListener("click", (e) => 
 {
+    e.preventDefault();
     const login = document.getElementById("emailSignIn").value;
     const password = document.getElementById("passwordSignIn").value;
 
