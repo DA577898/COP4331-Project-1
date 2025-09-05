@@ -59,5 +59,20 @@
         <div><i class="fa-solid fa-angles-right"></i></div>
     </div>
 
+    <!-- Add Contact Dialog -->
+    <dialog id="add-contact-dialog">
+        <h2>Add New Contact</h2>
+        <form>
+            <input type="text" id="inputFirstName" placeholder="First Name" required>
+            <input type="text" id="inputLastName" placeholder="Last Name" required>
+            <input type="email" id="inputEmail" placeholder="Email" required>
+            <input type="tel" id="inputPhoneNumber" placeholder="Phone Number" required>
+            <div>
+                <button type="button" onclick="document.getElementById('add-contact-dialog').close()">Cancel</button>
+                <button type="submit">Add Contact</button>
+            </div>
+        </form>
+    </dialog>
+
     <script src="js/contactManager.js"></script>
 </body>
