@@ -12,10 +12,16 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
+    loadContacts(userId);
+
     document.querySelector('.add-contact-button').addEventListener('click', function() {
         const dialog = document.getElementById('add-contact-dialog');
         dialog.showModal();
-        
+    });  
+
+    document.querySelector('#add-contact-dialog form').addEventListener('submit', function(e) {
+        e.preventDefault();
+
         const firstName = document.getElementById('inputFirstName').value;
         const lastName = document.getElementById('inputLastName').value;
         const email = document.getElementById('inputEmail').value;
@@ -42,10 +48,13 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data.error === "") {  
             // adding to contact here if response was successful
             // clearing the form
-            console.log("response was successful");
+                console.log("Contact added successfully");
+                document.getElementById('add-contact-dialog').close();
+                document.querySelector('#add-contact-dialog form').reset(); // Clear form
+                loadContacts(userId);
             } else {
                 // Show error message
-                console.log("there was an error")
+                console.log("Error adding contact:", data.error);
             }
         })
         .catch(error => {
@@ -53,7 +62,41 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error:', error);
         });
     });
+
+    document.getElementById('logout-button').addEventListener('click', () => {
+        localStorage.removeItem('userId');
+        localStorage.removeItem('firstName');
+        localStorage.removeItem('lastName');
+        window.location.href = 'index.html';
+    });
 });
+
+
+
+function loadContacts(userId) {
+    fetch('/LAMPAPI/SearchContacts.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            userId: parseInt(userId),
+            search: ''
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.results) {
+            displayContacts(data.results);
+        } else if (data.error){
+            console.log("Error loading contacts:", data.error);
+            displayContacts([]);
+        }    
+    })
+    .catch(error => {
+        console.log("Error loading contacts:", error);
+    });
+}
 
 function displayContacts(contacts) {
     const contactTableBody = document.getElementById('contactTableBody');
@@ -77,29 +120,3 @@ function displayContacts(contacts) {
     });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    fetch('/LAMPAPI/SearchContacts.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            userId: parseInt(userId),
-            search: ''
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        displayContacts(data.results);
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-});
-
-document.getElementById('logout-button').addEventListener('click', () => {
-    localStorage.removeItem('userId');
-    localStorage.removeItem('firstName');
-    localStorage.removeItem('lastName');
-    window.location.href = 'index.html';
-});
