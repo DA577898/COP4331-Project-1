@@ -17,7 +17,7 @@ signInButton.addEventListener("click", () =>
 
 
 // Registration JSON
-document.querySelector("#buttonRegister").addEventListener("click", () => 
+document.querySelector("#buttonRegister").addEventListener("click", (e) => 
 {
     e.preventDefault();
     const firstName = document.getElementById("firstNameRegister").value;
