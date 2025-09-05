@@ -2,6 +2,16 @@
 
 // need to create a form for this information
 document.addEventListener('DOMContentLoaded', function() {
+
+    // first making sure that a user is logged in, this information was sent from the local storage in script.js after a user is done logging in / registering
+
+    const userId = localStorage.getItem('userId');
+
+    if(!userId){
+        window.location.href = 'index.html';
+        return;
+    }
+
     document.querySelector('.add-contact-button').addEventListener('click', function() {
         const dialog = document.getElementById('add-contact-dialog');
         dialog.showModal();
@@ -67,7 +77,7 @@ function displayContacts(contacts) {
     });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
     fetch('/LAMPAPI/SearchContacts.php', {
         method: 'POST',
         headers: {
@@ -85,4 +95,11 @@ document.addEventListener('DOMContentLoaded', function() {
     .catch(error => {
         console.error('Error:', error);
     });
+});
+
+document.getElementById('logout-button').addEventListener('click', () => {
+    localStorage.removeItem('userId');
+    localStorage.removeItem('firstName');
+    localStorage.removeItem('lastName');
+    window.location.href('index.html');
 });
