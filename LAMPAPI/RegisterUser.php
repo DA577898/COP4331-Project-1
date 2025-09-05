@@ -3,31 +3,22 @@
 
 $inData = getRequestInfo(); // reading the JSON into variables
 
-/* Sample JSON from frontend
-{
-  "userId": 17,
-  "firstName": "Anju",
-  "lastName": "Thomas",
-  "email": "anju@gmail.com",
-  "phoneNumber": "555555555"
-}
-*/
-$required_fields = ["FirstName", "LastName", "Login", "Password"];
-$missing_fields = [];
+// $required_fields = ["FirstName", "LastName", "Login", "Password"];
+// $missing_fields = [];
 
-foreach ($required_fields as $field) {
-    if ((!isset($inData[$field])) || (trim($inData[$field]) === '' && is_string($inData[$field]))) {
-        $missing_fields[] = $field;
-    }
+// foreach ($required_fields as $field) {
+//     if ((!isset($inData[$field])) || (trim($inData[$field]) === '' && is_string($inData[$field]))) {
+//         $missing_fields[] = $field;
+//     }
 
-    if (count($missing_fields) > 0) {
-        returnWithError("Missing or empty fields: " . implode(", ", $missing_fields));
-        exit();
-    }
-}
+//     if (count($missing_fields) > 0) {
+//         returnWithError("Missing or empty fields: " . implode(", ", $missing_fields));
+//         exit();
+//     }
+// }
     // Extract and sanitize input data
-$FirstName = trim($inData["FirstName"]);
-$LastName = trim($inData["LastName"]);
+$Firstname = trim($inData["Firstname"]);
+$Lastname = trim($inData["Lastname"]);
 $Login = trim($inData["Login"]);
 $Password = trim($inData["Password"]);
 
@@ -36,31 +27,29 @@ $Password = trim($inData["Password"]);
 
 // constraints on login like special symbols?? 
 
-if (strlen($firstName) < 1 || strlen($firstName) > 50) {
+if (strlen($Firstname) < 1 || strlen($Firstname) > 50) {
     returnWithError("First name must be between 1 and 50 characters");
     exit;
 }
 
-if (strlen($lastName) < 1 || strlen($lastName) > 50) {
+if (strlen($Lastname) < 1 || strlen($Lastname) > 50) {
     returnWithError("Last name must be between 1 and 50 characters");
     exit;
 }
 
-if (strlen($login) < 3 || strlen($login) > 50) {
+if (strlen($Login) < 3 || strlen($Login) > 50) {
     returnWithError("Login must be between 3 and 50 characters");
     exit;
 }
 
-if (strlen($password) < 8 || strlen($password) > 50) {
+if (strlen($Password) < 8 || strlen($Password) > 50) {
     returnWithError("Password must be between 8 and 50characters");
     exit;
 }
 
 
 
-
-
-$conn = new mysqli("localhost", "team20", "team5Password", "COP4331"); // $conn = a MySQLi object, insert_id is a built in property
+$conn = new mysqli("localhost", "team20", "team5Password", "COP4331"); 
 
     // checking the connection
     if( $conn->connect_error ){
@@ -87,19 +76,19 @@ if ($result->num_rows > 0) {
 $duplicateCheck->close();
 
 // Insert new user
-$stmt = $conn->prepare("INSERT INTO Users (FirstName, LastName, Login, Password) VALUES (?, ?, ?, ?)");
+$stmt = $conn->prepare("INSERT INTO Users (Firstname, Lastname, Login, Password) VALUES (?, ?, ?, ?)");
 if (!$stmt) {
     returnWithError("Database error: Failed to prepare insert statement");
     $conn->close();
     exit();
 }
 
-$stmt->bind_param("ssss", $FirstName, $LastName, $Login, $Password);
+$stmt->bind_param("ssss", $Firstname, $Lastname, $Login, $Password);
 
 if ($stmt->execute()) {
     // Get the newly created user ID
     $userId = $stmt->insert_id;
-    returnWithInfo($userId, $FirstName, $LastName);
+    returnWithInfo($userId, $Firstname, $Lastname);
 } else {
     returnWithError("Failed to create user: " . $stmt->error);
 }
@@ -120,13 +109,13 @@ function sendResultInfoAsJson($obj)
 
 function returnWithError($err)
 {
-    $retValue = '{"userId":0,"firstName":"","lastName":"","error":"' . $err . '"}';
+    $retValue = '{"userId":0,"Firstname":"","Lastname":"","error":"' . $err . '"}';
     sendResultInfoAsJson($retValue);
 }
 
-function returnWithInfo($userId, $firstName, $lastName)
+function returnWithInfo($userId, $Firstname, $Lastname)
 {
-    $retValue = '{"userId":' . $userId . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
+    $retValue = '{"userId":' . $userId . ',"Firstname":"' . $Firstname . '","Lastname":"' . $Lastname . '","error":""}';
     sendResultInfoAsJson($retValue);
 }
 
