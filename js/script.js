@@ -19,6 +19,7 @@ signInButton.addEventListener("click", () =>
 // Registration JSON
 document.querySelector("#buttonRegister").addEventListener("click", () => 
 {
+    e.preventDefault();
     const firstName = document.getElementById("firstNameRegister").value;
     const lastName = document.getElementById("lastNameRegister").value;
     const login = document.getElementById("emailRegister").value;
