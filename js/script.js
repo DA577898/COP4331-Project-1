@@ -53,9 +53,8 @@ document.querySelector("#buttonRegister").addEventListener("click", (e) =>
         {
             console.log("Registration Successful");
             localStorage.setItem('userId', data.userId);
-            localStorage.setItem('firstName', data.firstName);
-            localStorage.setItem('firstName', data.firstName);
-            localStorage.setItem('firstName', data.firstName);
+            localStorage.setItem('firstName', data.FirstName);
+            localStorage.setItem('firstName', data.Lastname);
             window.location.href = "contactManager.html"
         } else
         {
@@ -101,9 +100,8 @@ document.querySelector("#buttonSignIn").addEventListener("click", (e) =>
             console.log("Login Successful");
             // storing the logged in user's credentials into the local storage and setting page to redirect to contact manager
             localStorage.setItem('userId', data.userId);
-            localStorage.setItem('firstName', data.firstName);
-            localStorage.setItem('firstName', data.firstName);
-            localStorage.setItem('firstName', data.firstName);
+            localStorage.setItem('firstName', data.FirstName);
+            localStorage.setItem('lastName', data.LastName);
             window.location.href = "contactManager.html"
         } else 
         {
