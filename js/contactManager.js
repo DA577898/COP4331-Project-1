@@ -3,6 +3,9 @@
 // need to create a form for this information
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.add-contact-button').addEventListener('click', function() {
+        const dialog = document.getElementById('add-contact-dialog');
+        dialog.showModal();
+        
         const firstName = document.getElementById('inputFirstName').value;
         const lastName = document.getElementById('inputLastName').value;
         const email = document.getElementById('inputEmail').value;
