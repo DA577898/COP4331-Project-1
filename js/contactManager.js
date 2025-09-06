@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const phoneNumber = document.getElementById('inputPhoneNumber').value;
         
         // this should be stored from login session 
-        const userId = localStorage.getItem('userId');
+        //const userId = localStorage.getItem('userId');
         console.log("Stored userId:", userId, "Type:", typeof userId);
         
         fetch('/LAMPAPI/CreateContact.php', { 
