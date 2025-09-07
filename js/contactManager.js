@@ -77,6 +77,46 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // POST fetch API request for UpdateContact.php
+    document.querySelector('#edit-contact-dialog form').addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const contact = contactsData[currentEditIndex];
+        const firstName = document.getElementById('editFirstName').value;
+        const lastName = document.getElementById('editLastName').value;
+        const email = document.getElementById('editEmail').value;
+        const phoneNumber = document.getElementById('editPhoneNumber').value;
+                
+        fetch('/LAMPAPI/UpdateContact.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            
+            body: JSON.stringify({
+                userId: parseInt(userId),
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                phoneNumber: phoneNumber,
+                contactID: contact.contactId
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.error === ''){
+                console.log("Successfully updated contact");
+                document.getElementById('edit-contact-dialog').close();
+                loadContacts(userId, '');
+            } else {
+                console.log("There was an error with updating this contact", data.error);
+            }
+        })
+        .catch(error => {
+               console.log('Error:', error);
+        }); 
+    });
+
     document.getElementById('logout-button').addEventListener('click', () => {
         localStorage.removeItem('userId');
         localStorage.removeItem('firstName');
@@ -119,7 +159,11 @@ function loadContacts(userId, searchValue = '') {
     });
 }
 
+let contactsData = []; // an empty array of contact objects (initialized)
+let currentEditIndex = 0;
+
 function displayContacts(contacts) {
+    contactsData = contacts;
     const contactTableBody = document.getElementById('contactTableBody');
     contactTableBody.innerHTML = '';
 
@@ -133,9 +177,9 @@ function displayContacts(contacts) {
             <td>${contact.email}</td>
             <td>${contact.phoneNumber}</td>
             <td>
-                <button class="edit-btn" data-id="${contact.ID}">
+                <button class="edit-btn" data-id="${index}">
                     <i class="fa-solid fa-pen-to-square"></i></button>
-                <button class="delete-btn" data-id="${contact.ID}">
+                <button class="delete-btn" data-id="${contact.contactId}">
                     <i class="fa-solid fa-trash"></i></button>
             </td>
         `;
@@ -151,10 +195,22 @@ function displayContacts(contacts) {
 
     document.querySelectorAll('.edit-btn').forEach(btn => {
         btn.addEventListener('click', function() {
-            const contactId = this.getAttribute('data-id');
-            editContact(contactId);
+            const index = this.getAttribute('data-id');
+            currentEditIndex = index;
+            editContact(index);
         });
     });
+}
+
+function editContact(index){
+    const contact = contactsData[index];
+
+    document.getElementById('editFirstName').value = contact.firstName;
+    document.getElementById('editLastName').value = contact.lastName;
+    document.getElementById('editEmail').value = contact.email;
+    document.getElementById('editPhoneNumber').value = contact.phoneNumber;
+
+    document.getElementById('edit-contact-dialog').showModal();
 }
 
 function deleteContact(contactId) {
@@ -179,5 +235,6 @@ function deleteContact(contactId) {
     })
     .catch(error => console.error("Delete error:", error));
 }
+
 
 
