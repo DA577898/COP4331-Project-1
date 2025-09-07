@@ -1,24 +1,33 @@
 
+/* Global Variables: 
+    ContactsData stores all contact objects
+    currentEditIndex tracks the contact that's being edited.
+*/
 
-// need to create a form for this information
-document.addEventListener('DOMContentLoaded', function() {
+    let contactsData = []; // an empty array of contact objects (initialized)
+    let currentEditIndex = 0;
 
-    // first making sure that a user is logged in, this information was sent from the local storage in script.js after a user is done logging in / registering
-
+/*
+    When page loads, checking if a user is logged in by looking for id in local storage.
+    If a user isn't found, they should redirect back to the login screen.
+*/
+document.addEventListener('DOMContentLoaded', () => {
     const userId = localStorage.getItem('userId');
     console.log("Stored userId:", userId, "Type:", typeof userId);
 
-    // if the user id doesn't exist, going back to the login screen.
     if(!userId){
         window.location.href = 'index.html';
         return;
     }
 
-    loadContacts(userId, ''); // passing in empty string for initial search term to obtain all user to obtain user's contacts
+    // When user is logged in and redirected, load their contacts
+    loadContacts(userId, '');
 
+    /* 
+    every time the user types in search input, calling SearchContacts.php with input value
+    */
     const searchInput = document.getElementById('search');
     if(searchInput) {
-    // this will run anytime we add anything inside input from
         searchInput.addEventListener('input', (e) => {
             const searchValue = e.target.value.trim();
             console.log(searchValue)
@@ -27,12 +36,20 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    /*
+    User input form to create a new contact
+    */
     document.querySelector('.add-contact-button').addEventListener('click', function() {
         const dialog = document.getElementById('add-contact-dialog');
         dialog.showModal();
     });  
 
-    // ADD Contact Fetch Request - POST
+    /* 
+    After the create new contact form is submitted, calling api
+    First get the form input fields
+    Then making the api call to PHP
+    then handling the response
+    */
     document.querySelector('#add-contact-dialog form').addEventListener('submit', function(e) {
         e.preventDefault();
 
@@ -59,15 +76,12 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
             if (data.error === "") {  
-            // adding to contact here if response was successful
-            // clearing the form
                 console.log("Contact added successfully");
                 document.getElementById('add-contact-dialog').close();
                 document.querySelector('#add-contact-dialog form').reset(); // Clear form
                 console.log("Sending userId to API:", parseInt(userId));
                 loadContacts(userId);
             } else {
-                // Show error message
                 console.log("Error adding contact:", data.error);
             }
         })
@@ -77,7 +91,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // POST fetch API request for UpdateContact.php
+    /* 
+    After the edit contact form is submitted, calling api
+    This form uses currentEditIndex to know which form is being edited
+    First get the form input fields
+    Then making the api call to PHP
+    then handling the response
+
+    */
+
     document.querySelector('#edit-contact-dialog form').addEventListener('submit', (e) => {
         e.preventDefault();
 
@@ -117,6 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }); 
     });
 
+    /* logout button functionality, returning user to the login/register page */
     document.getElementById('logout-button').addEventListener('click', () => {
         localStorage.removeItem('userId');
         localStorage.removeItem('firstName');
@@ -126,7 +149,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-// Search contact fetch REQUEST - POST
+/* 
+Implemented Search Fetch request
+    fetches contacts from the server
+    gets called when page loads, when contacts are added, edited, searched, updated, and deleted
+    searchValue = '' means show all contacts, which takes place when page loads, and after add, edit, and delete contact
+*/
 function loadContacts(userId, searchValue = '') {
     fetch('/LAMPAPI/SearchContacts.php', {
         method: 'POST',
@@ -159,9 +187,10 @@ function loadContacts(userId, searchValue = '') {
     });
 }
 
-let contactsData = []; // an empty array of contact objects (initialized)
-let currentEditIndex = 0;
-
+/*
+This creates the table of contacts
+table is rebuilt every time a contact is added, edited, deleted, and searched
+*/
 function displayContacts(contacts) {
     contactsData = contacts;
     const contactTableBody = document.getElementById('contactTableBody');
@@ -202,6 +231,7 @@ function displayContacts(contacts) {
     });
 }
 
+// adding the selected contacts current information to the edit form
 function editContact(index){
     const contact = contactsData[index];
 
@@ -213,6 +243,8 @@ function editContact(index){
     document.getElementById('edit-contact-dialog').showModal();
 }
 
+// delete fetch request implemented
+// still need to add delete alert
 function deleteContact(contactId) {
     const userId = localStorage.getItem('userId');
 
