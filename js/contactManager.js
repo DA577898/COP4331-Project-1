@@ -14,7 +14,18 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
-    loadContacts(userId);
+    loadContacts(userId, ''); // passing in empty string for initial search term to obtain all user to obtain user's contacts
+
+    const searchInput = document.getElementById('search');
+    if(searchInput) {
+    // this will run anytime we add anything inside input from
+        searchInput.addEventListener('input', (e) => {
+            const searchValue = e.target.value.trim();
+            console.log(searchValue)
+
+            loadContacts(userId, searchValue);    
+        });
+    }
 
     document.querySelector('.add-contact-button').addEventListener('click', function() {
         const dialog = document.getElementById('add-contact-dialog');
@@ -76,16 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 // Search contact fetch REQUEST - POST
-const searchInput = document.getElementById('search');
-
-// this will run anytime we add anything inside input from
-searchInput.addEventListener('input', (e) => {
-    const value = e.target.value;
-    console.log(value)
-})
-
-
-function loadContacts(userId) {
+function loadContacts(userId, searchValue = '') {
     fetch('/LAMPAPI/SearchContacts.php', {
         method: 'POST',
         headers: {
@@ -93,20 +95,27 @@ function loadContacts(userId) {
         },
         body: JSON.stringify({
             userId: parseInt(userId),
-            search: ''
+            search: searchValue
         })
     })
     .then(response => response.json())
     .then(data => {
+
         if (data.results) {
             displayContacts(data.results);
-        } else if (data.error){
-            console.log("Error loading contacts:", data.error);
+
+        } else if (data.error === 'No Records Found'){
+            console.log("There were no contacts found for this search value:", searchValue);
             displayContacts([]);
-        }    
+        } else if (data.error){
+            console.log("Error loading contacts", data.error);
+            displayContacts([]);
+        }   
+
     })
     .catch(error => {
         console.log("Error loading contacts:", error);
+        displayContacts([]);
     });
 }
 
@@ -163,7 +172,7 @@ function deleteContact(contactId) {
     .then(data => {
         if (data.error === "") {
             console.log("Deleted contact:", contactId);
-            loadContacts(userId); // refresh list
+            loadContacts(userId, ''); // refresh list
         } else {
             console.log("Error deleting:", data.error);
         }
