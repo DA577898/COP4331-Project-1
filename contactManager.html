@@ -74,5 +74,19 @@
         </form>
     </dialog>
 
+    <dialog id="edit-contact-dialog">
+        <h2>Edit New Contact</h2>
+        <form>
+            <input type="text" id="editFirstName" placeholder="First Name" required>
+            <input type="text" id="editLastName" placeholder="Last Name" required>
+            <input type="email" id="editEmail" placeholder="Email" required>
+            <input type="tel" id="editPhoneNumber" placeholder="Phone Number" required>
+            <div>
+                <button type="button" onclick="document.getElementById('edit-contact-dialog').close()">Cancel</button>
+                <button type="submit">Update Contact</button>
+            </div>
+        </form>
+    </dialog>
+
     <script src="js/contactManager.js"></script>
 </body>
