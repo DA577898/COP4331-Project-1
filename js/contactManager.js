@@ -148,3 +148,27 @@ function displayContacts(contacts) {
     });
 }
 
+function deleteContact(contactId) {
+    const userId = localStorage.getItem('userId');
+
+    fetch('/LAMPAPI/DeleteContact.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            userId: parseInt(userId),
+            contactId: parseInt(contactId)
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error === "") {
+            console.log("Deleted contact:", contactId);
+            loadContacts(userId); // refresh list
+        } else {
+            console.log("Error deleting:", data.error);
+        }
+    })
+    .catch(error => console.error("Delete error:", error));
+}
+
+
