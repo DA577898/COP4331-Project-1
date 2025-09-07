@@ -124,11 +124,27 @@ function displayContacts(contacts) {
             <td>${contact.email}</td>
             <td>${contact.phoneNumber}</td>
             <td>
-                <button><i class="fa-solid fa-pen-to-square"></i></button>
-                <button><i class="fa-solid fa-trash"></i></button>
+                <button class="edit-btn" data-id="${contact.ID}">
+                    <i class="fa-solid fa-pen-to-square"></i></button>
+                <button class="delete-btn" data-id="${contact.ID}">
+                    <i class="fa-solid fa-trash"></i></button>
             </td>
         `;
         contactTableBody.appendChild(row);
+    });
+
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const contactId = this.getAttribute('data-id');
+            deleteContact(contactId);
+        });
+    });
+
+    document.querySelectorAll('.edit-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const contactId = this.getAttribute('data-id');
+            editContact(contactId);
+        });
     });
 }
 
