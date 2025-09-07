@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const userId = localStorage.getItem('userId');
     console.log("Stored userId:", userId, "Type:", typeof userId);
 
+    // if the user id doesn't exist, going back to the login screen.
     if(!userId){
         window.location.href = 'index.html';
         return;
@@ -20,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         dialog.showModal();
     });  
 
+    // ADD Contact Fetch Request - POST
     document.querySelector('#add-contact-dialog form').addEventListener('submit', function(e) {
         e.preventDefault();
 
@@ -28,8 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const email = document.getElementById('inputEmail').value;
         const phoneNumber = document.getElementById('inputPhoneNumber').value;
         
-        // this should be stored from login session 
-        //const userId = localStorage.getItem('userId');
         console.log("Stored userId:", userId, "Type:", typeof userId);
         
         fetch('/LAMPAPI/CreateContact.php', { 
@@ -74,6 +74,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+
+// Search contact fetch REQUEST - POST
+const searchInput = document.getElementById('search');
+
+// this will run anytime we add anything inside input from
+searchInput.addEventListener('input', (e) => {
+    const value = e.target.value;
+    console.log(value)
+})
 
 
 function loadContacts(userId) {
