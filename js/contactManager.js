@@ -246,26 +246,34 @@ function editContact(index){
 // delete fetch request implemented
 // still need to add delete alert
 function deleteContact(contactId) {
-    const userId = localStorage.getItem('userId');
+    // Confirmation Alert
+    const confirmDelete = confirm("Are you sure you want to delete this contact?");
+    if (confirmDelete){
 
-    fetch('/LAMPAPI/DeleteContact.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            userId: parseInt(userId),
-            contactId: parseInt(contactId)
+    
+
+        const userId = localStorage.getItem('userId');
+
+        fetch('/LAMPAPI/DeleteContact.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                userId: parseInt(userId),
+                contactId: parseInt(contactId)
+            })
         })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.error === "") {
-            console.log("Deleted contact:", contactId);
-            loadContacts(userId, ''); // refresh list
-        } else {
-            console.log("Error deleting:", data.error);
-        }
-    })
-    .catch(error => console.error("Delete error:", error));
+        .then(response => response.json())
+        .then(data => {
+            if (data.error === "") {
+                console.log("Deleted contact:", contactId);
+                loadContacts(userId, ''); // refresh list
+            } else {
+                console.log("Error deleting:", data.error);
+            }
+        })
+        .catch(error => console.error("Delete error:", error));
+
+    }
 }
 
 
