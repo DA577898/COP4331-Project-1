@@ -63,7 +63,6 @@ document.querySelector("#buttonRegister").addEventListener("click", (e) =>
     })
     .catch(error =>
     {
-        alert("Failed to register. Please try again.");
         console.error("Error:", error);
     });
 });
@@ -110,7 +109,6 @@ document.querySelector("#buttonSignIn").addEventListener("click", (e) =>
     })
     .catch(error => 
     {
-        alert("Failed to Login. Please try again.");
         console.error("Error:", error);
     });
 });
