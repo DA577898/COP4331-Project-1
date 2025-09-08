@@ -1,0 +1,243 @@
+swagger: '2.0'
+info:
+  description: This is the API documentation for Project 1
+  version: 1.0.0
+  title: Contact Management App
+  contact:
+    email: ha705080@ucf.edu
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+host: cop4331project.dev
+basePath: /LAMPAPI
+schemes:
+  - http
+
+paths:
+  /LoginUser.php:
+    post:
+      tags:
+        - loginUser
+      summary: Logs a user into the system
+      operationId: doLogin
+      description: Verifies user credentials and returns their information if successful.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: LoginItem
+          description: The user's login credentials
+          schema:
+            type: object
+            required:
+              - login
+              - password
+            properties:
+              login:
+                type: string
+              password:
+                type: string
+      responses:
+        '200':
+          description: Successful login
+        '404':
+          description: User not found
+        '500':
+          description: Server error
+
+  /RegisterUser.php:
+    post:
+      tags:
+        - registerUser
+      summary: Registers a new user
+      operationId: registerUser
+      description: Creates a new user account with the provided information
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: RegisterItem
+          description: The new user's information
+          schema:
+            type: object
+            required:
+              - firstName
+              - lastName
+              - login
+              - password
+            properties:
+              firstName:
+                type: string
+              lastName:
+                type: string
+              login:
+                type: string
+              password:
+                type: string
+      responses:
+        '200':
+          description: Successful registration
+        '400':
+          description: Invalid input or user already exists
+        '500':
+          description: Server error
+
+  /CreateContact.php:
+    post:
+      tags:
+        - createContact
+      summary: Creates a new contact
+      operationId: createContact
+      description: Adds a new contact to the user's contact list
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: ContactItem
+          description: The contact information to create
+          schema:
+            type: object
+            required:
+              - userId
+              - firstName
+              - lastName
+              - email
+              - phoneNumber
+            properties:
+              userId:
+                type: integer
+              firstName:
+                type: string
+              lastName:
+                type: string
+              email:
+                type: string
+              phoneNumber:
+                type: string
+      responses:
+        '200':
+          description: Contact created successfully
+        '400':
+          description: Invalid input data
+        '500':
+          description: Server error
+
+  /UpdateContact.php:
+    post:
+      tags:
+        - updateContact
+      summary: Updates an existing contact
+      operationId: updateContact
+      description: Modifies the information of an existing contact
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: UpdateContactItem
+          description: The updated contact information
+          schema:
+            type: object
+            required:
+              - userId
+              - contactID
+              - firstName
+              - lastName
+              - email
+              - phoneNumber
+            properties:
+              userId:
+                type: integer
+              contactID:
+                type: integer
+              firstName:
+                type: string
+              lastName:
+                type: string
+              email:
+                type: string
+              phoneNumber:
+                type: string
+      responses:
+        '200':
+          description: Contact updated successfully
+        '400':
+          description: Invalid input data
+        '404':
+          description: Contact not found
+        '500':
+          description: Server error
+
+  /DeleteContact.php:
+    post:
+      tags:
+        - deleteContact
+      summary: Deletes a contact
+      operationId: deleteContact
+      description: Removes a contact from the user's contact list
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: DeleteContactItem
+          description: The contact ID to delete
+          schema:
+            type: object
+            required:
+              - userId
+              - contactId
+            properties:
+              userId:
+                type: integer
+              contactId:
+                type: integer
+      responses:
+        '200':
+          description: Contact deleted successfully
+        '404':
+          description: Contact not found
+        '500':
+          description: Server error
+
+  /SearchContacts.php:
+    post:
+      tags:
+        - searchContacts
+      summary: Searches for contacts
+      operationId: searchContacts
+      description: Searches the user's contacts by name, email, or phone number
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: SearchItem
+          description: The search criteria
+          schema:
+            type: object
+            required:
+              - userId
+              - search
+            properties:
+              userId:
+                type: integer
+              search:
+                type: string
+      responses:
+        '200':
+          description: Search completed successfully
+        '404':
+          description: No contacts found
+        '500':
+          description: Server error
