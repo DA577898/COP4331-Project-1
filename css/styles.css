@@ -55,7 +55,7 @@ button
 
 button:hover
 {
-    background-color: navy;
+    background-color: rgb(12, 97, 158);
     color: rgb(144, 213, 255);
     border: 1px solid rgb(144, 213, 255);
     cursor: pointer;
