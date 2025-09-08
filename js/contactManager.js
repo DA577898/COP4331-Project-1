@@ -86,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         })
         .catch(error => {
-            alert('Failed to add contact. Please try again.');
             console.error('Error:', error);
         });
     });
@@ -244,7 +243,6 @@ function editContact(index){
 }
 
 // delete fetch request implemented
-// still need to add delete alert
 function deleteContact(contactId) {
     // Confirmation Alert
     const confirmDelete = confirm("Press OK to confirm deletion");
