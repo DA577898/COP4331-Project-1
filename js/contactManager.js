@@ -247,10 +247,8 @@ function editContact(index){
 // still need to add delete alert
 function deleteContact(contactId) {
     // Confirmation Alert
-    const confirmDelete = confirm("Are you sure you want to delete this contact?");
+    const confirmDelete = confirm("Press OK to confirm deletion");
     if (confirmDelete){
-
-    
 
         const userId = localStorage.getItem('userId');
 
