@@ -245,7 +245,7 @@ function editContact(index){
 // delete fetch request implemented
 function deleteContact(contactId) {
     // Confirmation Alert
-    const confirmDelete = confirm("Press OK to confirm deletion");
+    const confirmDelete = confirm("Are you sure you want to delete this contact?");
     if (confirmDelete){
 
         const userId = localStorage.getItem('userId');
