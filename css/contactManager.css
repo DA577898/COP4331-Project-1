@@ -74,7 +74,7 @@ td button:nth-child(2):hover{
 }
 
 .add-contact-button:hover{
-    background-color: rgba(9, 70, 113, 0.448);
+    background-color: rgb(0, 59, 100);
 }
 
 
@@ -107,7 +107,7 @@ th, td{ /*applies to table headers and table data cell */
 /* from the tutorial, omitted img styling here, if we end up including it, return to 6:42 */
 
 tr:hover td{
-    color: rgb(144, 213, 255);
+    color: rgb(12, 97, 158);
     cursor: pointer;
     background-color: #f6f9fc;
 }
@@ -144,6 +144,10 @@ td{
     padding: 10px 20px;
     color: white;
     background-color: rgb(12, 97, 158);
+}
+
+#logout-button:hover{
+    background-color: rgb(0, 59, 100);
 }
 
 #add-contact-dialog, #edit-contact-dialog {
