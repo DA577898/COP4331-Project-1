@@ -165,12 +165,13 @@ td{
 /* Center the title */
 #add-contact-dialog h2, #edit-contact-dialog h2 {
     text-align: center;
+    margin-bottom: 20px;
 }
 
 /* Center the buttons */
 #add-contact-dialog form div, #edit-contact-dialog form div {
     text-align: center;
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 #add-contact-dialog::backdrop, #edit-contact-dialog::backdrop {
