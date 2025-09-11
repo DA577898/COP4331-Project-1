@@ -86,7 +86,6 @@ td button:nth-child(2):hover{
 table{
     width: 100%;
     table-layout: fixed;
-    min-width: 1000px;
     border-collapse: collapse;
 }
 
