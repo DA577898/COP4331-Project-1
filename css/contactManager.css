@@ -1,5 +1,7 @@
 body{
     font-family: 'Poppins', sans-serif;
+    background: -webkit-linear-gradient(to right, rgb(12, 97, 158), rgb(144, 213, 255), rgb(12, 97, 158));
+    background: linear-gradient(to right, rgb(12, 97, 158), rgb(144, 213, 255), rgb(12, 97, 158));
 }
 
 *{
@@ -18,7 +20,7 @@ body{
     align-items: center;
     padding: 20px;
     background: -webkit-linear-gradient(to right, rgb(12, 97, 158), rgb(144, 213, 255), rgb(12, 97, 158));
-    background: linear-gradient(to right, rgb(12, 97, 158), rgb(144, 213, 255), rgb(12, 97, 158));;
+    background: linear-gradient(to right, rgb(12, 97, 158), rgb(144, 213, 255), rgb(12, 97, 158));
 }
 
 .table-header p {
@@ -142,7 +144,7 @@ td{
     padding: 10px 20px;
     color: white;
     background-color: #0298cfbb;
-    margin-left: 20px;
+    margin-left: 50%;
 }
 
 #add-contact-dialog, #edit-contact-dialog {
