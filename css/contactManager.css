@@ -149,12 +149,24 @@ td{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    margin: 0; /* Remove default margins */
+    margin: 0;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: white;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 600px; /* Make it wider - adjust this number as needed */
+}
+
+/* Center the title */
+#add-contact-dialog h2, #edit-contact-dialog h2 {
+    text-align: center;
+}
+
+/* Center the buttons */
+#add-contact-dialog form div, #edit-contact-dialog form div {
+    text-align: center;
+    margin-top: 15px;
 }
 
 #add-contact-dialog::backdrop, #edit-contact-dialog::backdrop {
