@@ -35,11 +35,11 @@ input {
     outline: none;
     border: 1px solid rgb(144, 213, 255);
     border-radius: 6px;
-    color: rgb(144, 213, 255);
+    color: rgb(12, 97, 158);
 }
 
 ::placeholder{
-    color: rgb(144, 213, 255);
+    color: rgb(12, 97, 158);
 }
 
 button{
