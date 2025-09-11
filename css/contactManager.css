@@ -107,7 +107,7 @@ th, td{ /*applies to table headers and table data cell */
 /* from the tutorial, omitted img styling here, if we end up including it, return to 6:42 */
 
 tr:hover td{
-    color: #0298cf;
+    color: rgb(144, 213, 255);
     cursor: pointer;
     background-color: #f6f9fc;
 }
