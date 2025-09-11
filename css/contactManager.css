@@ -141,10 +141,11 @@ td{
 }
 
 #logout-button{
+    display: block;
+    margin: 20px auto;
     padding: 10px 20px;
     color: white;
     background-color: #0298cfbb;
-    margin-left: 50%;
 }
 
 #add-contact-dialog, #edit-contact-dialog {
