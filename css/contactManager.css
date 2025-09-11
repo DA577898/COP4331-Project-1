@@ -124,34 +124,6 @@ td{
     background-color: rgb(240, 240, 240);
 }
 
-.pagination{
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-    padding: 10px 20px;
-    /*background-color: green;*/
-}
-
-.pagination div{
-    padding: 10px;
-    border: 2px solid #e7e1e1;
-    height: 40px;
-    width: 40px;
-    border-radius: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #0298cfbb;
-    color: #ffffff;
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.618);
-    margin: 0 5px;
-    cursor: pointer;
-}
-.pagination div:hover{
-    background-color: #016c93;
-}
-
-
 ::-webkit-scrollbar{ /* this adds some styling to the scrollbar, need to do more research */
     height: 5px;
     width: 5px;
