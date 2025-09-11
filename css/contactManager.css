@@ -143,3 +143,20 @@ td{
     background-color: #0298cfbb;
     margin-left: 20px;
 }
+
+#add-contact-dialog, #edit-contact-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0; /* Remove default margins */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#add-contact-dialog::backdrop, #edit-contact-dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
