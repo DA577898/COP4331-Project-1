@@ -22,7 +22,7 @@ body{
 }
 
 .table-header p, .search-wrapper label {
-    color: white;
+    color: rgb(12, 97, 158);
     font-weight: bold;
     text-shadow: 
         -1px -1px 0 black,
