@@ -21,10 +21,11 @@ body{
     background-color: rgb(144, 213, 255);
 }
 
-.table-header p {
+.table-header p, .search-wrapper label {
     color: black;
     font-weight: bold;
     text-shadow: 1px 1px 1px rgba(255,255,255,0.5);
+    font-size: 20px;
 }
 
 #table-border{
