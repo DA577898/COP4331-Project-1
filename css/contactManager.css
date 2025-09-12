@@ -74,6 +74,7 @@ td button:nth-child(2):hover{
     padding: 10px 20px;
     color: white;
     background-color: rgb(12, 97, 158);
+    font-size: 16px;
 }
 
 .add-contact-button:hover{
