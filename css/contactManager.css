@@ -168,7 +168,10 @@ td{
 }
 
 #add-contact-dialog form, #edit-contact-dialog form {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
 }
 
 /* Center the title */
@@ -195,4 +198,8 @@ td{
 
 #add-contact-dialog button:hover, #edit-contact-dialog button:hover {
     background-color: rgb(12, 97, 158);
+}
+
+#add-contact-dialog input, #edit-contact-dialog input {
+    text-align: left;
 }
