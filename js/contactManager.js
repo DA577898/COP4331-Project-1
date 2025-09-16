@@ -9,6 +9,7 @@
     let currentPage = 1;
     let totalPages = 1;
     let contactsPerPage = 10;
+    let searchValue = '';
 
 /*
     When page loads, checking if a user is logged in by looking for id in local storage.
@@ -19,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log("Stored userId:", userId, "Type:", typeof userId);
 
     if(!userId){
-        window.location.href = 'index.html';
+        window.location.href = '/';
         return;
     }
 
@@ -32,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('search');
     if(searchInput) {
         searchInput.addEventListener('input', (e) => {
-            const searchValue = e.target.value.trim();
+            searchValue = e.target.value.trim();
             console.log(searchValue)
 
             loadContacts(userId, searchValue);    
@@ -146,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.removeItem('userId');
         localStorage.removeItem('firstName');
         localStorage.removeItem('lastName');
-        window.location.href = 'index.html';
+        window.location.href = '/';
     });
 });
 
@@ -287,6 +288,7 @@ function deleteContact(contactId) {
 function displayPagination(pagination) {
     const paginationContainer = document.getElementById('pagination');
     paginationContainer.innerHTML = '';
+    userId = localStorage.getItem('userId');
 
     // First page button
     const firstPageDiv = document.createElement('div');
