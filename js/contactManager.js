@@ -6,6 +6,9 @@
 
     let contactsData = []; // an empty array of contact objects (initialized)
     let currentEditIndex = 0;
+    let currentPage = 1;
+    let totalPages = 1;
+    let contactsPerPage = 10;
 
 /*
     When page loads, checking if a user is logged in by looking for id in local storage.
@@ -15,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const userId = localStorage.getItem('userId');
     console.log("Stored userId:", userId, "Type:", typeof userId);
 
-    if(!userId){
+    if(userId){
         window.location.href = 'index.html';
         return;
     }
@@ -162,7 +165,9 @@ function loadContacts(userId, searchValue = '') {
         },
         body: JSON.stringify({
             userId: parseInt(userId),
-            search: searchValue
+            search: searchValue,
+            num_contacts: contactsPerPage,
+            num_page: currentPage
         })
     })
     .then(response => response.json())
@@ -170,19 +175,22 @@ function loadContacts(userId, searchValue = '') {
 
         if (data.results) {
             displayContacts(data.results);
-
+            displayPagination(data.pagination);
         } else if (data.error === 'No Records Found'){
             console.log("There were no contacts found for this search value:", searchValue);
             displayContacts([]);
+            displayPagination([]);
         } else if (data.error){
             console.log("Error loading contacts", data.error);
             displayContacts([]);
+            displayPagination([]);
         }   
 
     })
     .catch(error => {
         console.log("Error loading contacts:", error);
         displayContacts([]);
+        displayPagination([]);
     });
 }
 
@@ -263,6 +271,7 @@ function deleteContact(contactId) {
             if (data.error === "") {
                 console.log("Deleted contact:", contactId);
                 loadContacts(userId, ''); // refresh list
+                displayPagination([]);
             } else {
                 console.log("Error deleting:", data.error);
             }
@@ -272,5 +281,65 @@ function deleteContact(contactId) {
     }
 }
 
+function displayPagination(pagination) {
+    const paginationContainer = document.getElementById('pagination');
+    paginationContainer.innerHTML = '';
 
+    // First page button
+    const firstPageDiv = document.createElement('div');
+    firstPageDiv.innerHTML = '<i class="fa-solid fa-angles-left"></i>';
+    paginationContainer.appendChild(firstPageDiv);
+    firstPageDiv.addEventListener('click', () => {
+        currentPage = 1;
+        displayPagination(pagination);
+        loadContacts(userId, searchValue);
+    });
 
+    // Previous page button
+    const prevPageDiv = document.createElement('div');
+    prevPageDiv.innerHTML = '<i class="fa-solid fa-angle-left"></i>';
+    paginationContainer.appendChild(prevPageDiv);
+    prevPageDiv.addEventListener('click', () => {
+        if(currentPage > 1) {
+            currentPage--;
+        }
+        displayPagination(pagination);
+        loadContacts(userId, searchValue);
+    });
+    // Page numbers
+    for(let i = 1; i <= totalPages; i++) {
+        const pageDiv = document.createElement('div');
+        pageDiv.textContent = i;
+        if(i === currentPage) {
+            pageDiv.classList.add('active-page');
+        }
+        paginationContainer.appendChild(pageDiv);
+        pageDiv.addEventListener('click', () => {
+            currentPage = i;
+            displayPagination(pagination);
+            loadContacts(userId, searchValue);
+        });
+    }
+
+    // Next page button
+    const nextPageDiv = document.createElement('div');
+    nextPageDiv.innerHTML = '<i class="fa-solid fa-angle-right"></i>';
+    paginationContainer.appendChild(nextPageDiv);
+    nextPageDiv.addEventListener('click', () => {
+        if(currentPage < totalPages) {
+            currentPage++;
+        }
+        displayPagination(pagination);
+        loadContacts(userId, searchValue);
+    });
+
+    // Last page button
+    const lastPageDiv = document.createElement('div');
+    lastPageDiv.innerHTML = '<i class="fa-solid fa-angles-right"></i>';
+    paginationContainer.appendChild(lastPageDiv);
+    lastPageDiv.addEventListener('click', () => {
+        currentPage = totalPages;
+        displayPagination(pagination);
+        loadContacts(userId, searchValue);
+    });
+}
