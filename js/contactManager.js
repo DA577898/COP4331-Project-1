@@ -178,6 +178,11 @@ function loadContacts(userId, searchValue = '') {
             totalPages = data.pagination.totalPages;
             displayContacts(data.results);
             displayPagination(data.pagination);
+            if(currentPage > totalPages){
+                currentPage = totalPages;
+                displayPagination(pagination);
+                loadContacts(userId, searchValue)
+            }
         } else if (data.error === 'No Records Found'){
             console.log("There were no contacts found for this search value:", searchValue);
             totalPages = 1;
@@ -196,6 +201,7 @@ function loadContacts(userId, searchValue = '') {
         displayContacts([]);
         displayPagination([]);
     });
+
 }
 
 /*
