@@ -174,14 +174,17 @@ function loadContacts(userId, searchValue = '') {
     .then(data => {
 
         if (data.results) {
+            totalPages = data.pagination.totalPages;
             displayContacts(data.results);
             displayPagination(data.pagination);
         } else if (data.error === 'No Records Found'){
             console.log("There were no contacts found for this search value:", searchValue);
+            totalPages = 1;
             displayContacts([]);
             displayPagination([]);
         } else if (data.error){
             console.log("Error loading contacts", data.error);
+            totalPages = 1;
             displayContacts([]);
             displayPagination([]);
         }   
