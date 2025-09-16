@@ -9,6 +9,7 @@
     let currentPage = 1;
     let totalPages = 1;
     let contactsPerPage = 10;
+    let searchValue = '';
 
 /*
     When page loads, checking if a user is logged in by looking for id in local storage.
@@ -32,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('search');
     if(searchInput) {
         searchInput.addEventListener('input', (e) => {
-            const searchValue = e.target.value.trim();
+            searchValue = e.target.value.trim();
             console.log(searchValue)
 
             loadContacts(userId, searchValue);    
