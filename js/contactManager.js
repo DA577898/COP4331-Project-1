@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log("Stored userId:", userId, "Type:", typeof userId);
 
     if(!userId){
-        window.location.href = 'index.html';
+        window.location.href = '/';
         return;
     }
 
@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.removeItem('userId');
         localStorage.removeItem('firstName');
         localStorage.removeItem('lastName');
-        window.location.href = 'index.html';
+        window.location.href = '/';
     });
 });
 
@@ -287,6 +287,7 @@ function deleteContact(contactId) {
 function displayPagination(pagination) {
     const paginationContainer = document.getElementById('pagination');
     paginationContainer.innerHTML = '';
+    userId = localStorage.getItem('userId');
 
     // First page button
     const firstPageDiv = document.createElement('div');
