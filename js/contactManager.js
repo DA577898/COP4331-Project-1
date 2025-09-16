@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const userId = localStorage.getItem('userId');
     console.log("Stored userId:", userId, "Type:", typeof userId);
 
-    if(userId){
+    if(!userId){
         window.location.href = 'index.html';
         return;
     }
