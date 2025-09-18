@@ -58,31 +58,36 @@ button{
     color: #ffffff;
 }
 
-td button:nth-child(1){ /* this is the edit button */
-    background-color: rgb(144, 213, 255);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
+td .edit-btn {
+  background-color: rgb(144, 213, 255);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 12px;
+  color: white;
 }
 
-td button:nth-child(1):hover{
-    background-color: rgb(12, 97, 158);
+td .edit-btn:hover {
+  background-color: rgb(12, 97, 158);
 }
 
-td button:nth-child(2){ 
-    background-color: #f80000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
+td .delete-btn {
+  background-color: #f80000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 12px;
+  color: white;
 }
 
-td button:nth-child(2):hover{ 
-    background-color: #bf0404;
+td .delete-btn:hover {
+  background-color: #bf0404;
 }
+
 
 .add-contact-button{
     padding: 10px 25px;
