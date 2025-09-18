@@ -58,8 +58,11 @@ button{
     color: #ffffff;
 }
 
-/* Make each button keep icon + text stacked */
-td button {
+
+
+/* Edit button */
+.edit-btn {
+  background-color: rgb(144, 213, 255);
   display: inline-flex;       /* keeps them side by side */
   flex-direction: column;     /* stacks icon above text */
   align-items: center;
@@ -71,13 +74,18 @@ td button {
   color: white;
   cursor: pointer;
 }
-
-/* Edit button */
-.edit-btn {
-  background-color: rgb(144, 213, 255);
-}
 .edit-btn:hover {
   background-color: rgb(12, 97, 158);
+  display: inline-flex;       /* keeps them side by side */
+  flex-direction: column;     /* stacks icon above text */
+  align-items: center;
+  justify-content: center;
+  gap: 4px;                   /* space between icon + text */
+  padding: 6px 10px;          /* keep same look as before */
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
 }
 
 /* Delete button */
