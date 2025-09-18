@@ -58,33 +58,41 @@ button{
     color: #ffffff;
 }
 
-td .edit-btn {
-  background-color: rgb(144, 213, 255);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  color: white;
+/* Center the buttons in the Actions column */
+.actions-cell {
+  text-align: center;
 }
 
-td .edit-btn:hover {
+/* Make each button keep icon + text stacked */
+.actions-cell button {
+  display: inline-flex;       /* keeps them side by side */
+  flex-direction: column;     /* stacks icon above text */
+  align-items: center;
+  justify-content: center;
+  gap: 4px;                   /* space between icon + text */
+  padding: 6px 10px;          /* keep same look as before */
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Edit button */
+.actions-cell .edit-btn {
+  background-color: rgb(144, 213, 255);
+}
+.actions-cell .edit-btn:hover {
   background-color: rgb(12, 97, 158);
 }
 
-td .delete-btn {
-  background-color: #f80000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  color: white;
+/* Delete button */
+.actions-cell .delete-btn {
+  background-color: rgb(255, 123, 123);
+}
+.actions-cell .delete-btn:hover {
+  background-color: rgb(158, 12, 12);
 }
 
-td .delete-btn:hover {
-  background-color: #bf0404;
-}
 
 
 .add-contact-button{
