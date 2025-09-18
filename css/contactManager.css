@@ -71,7 +71,7 @@ button{
   padding: 6px 10px;          /* keep same look as before */
   border: none;
   border-radius: 6px;
-  color: white;
+  color: black;
   cursor: pointer;
 }
 .edit-btn:hover {
@@ -89,7 +89,7 @@ button{
   padding: 6px 10px;          /* keep same look as before */
   border: none;
   border-radius: 6px;
-  color: white;
+  color: black;
   cursor: pointer;
 }
 .delete-btn:hover {
