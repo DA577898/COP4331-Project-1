@@ -65,7 +65,6 @@ td .edit-btn {
   align-items: center;
   justify-content: center;
   gap: 4px;
-  padding: 8px 12px;
   color: white;
 }
 
@@ -80,7 +79,6 @@ td .delete-btn {
   align-items: center;
   justify-content: center;
   gap: 4px;
-  padding: 8px 12px;
   color: white;
 }
 
