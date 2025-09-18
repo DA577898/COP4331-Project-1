@@ -224,9 +224,13 @@ function displayContacts(contacts) {
             <td>${contact.phoneNumber}</td>
             <td>
                 <button class="edit-btn" data-id="${index}">
-                    <i class="fa-solid fa-pen-to-square"></i></button>
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <span>Edit</span>
+                </button>
                 <button class="delete-btn" data-id="${contact.contactId}">
-                    <i class="fa-solid fa-trash"></i></button>
+                    <i class="fa-solid fa-trash"></i>
+                    <span>Delete</span>
+                </button>
             </td>
         `;
         contactTableBody.appendChild(row);

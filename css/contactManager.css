@@ -60,6 +60,11 @@ button{
 
 td button:nth-child(1){ /* this is the edit button */
     background-color: rgb(144, 213, 255);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
 }
 
 td button:nth-child(1):hover{
@@ -68,6 +73,11 @@ td button:nth-child(1):hover{
 
 td button:nth-child(2){ 
     background-color: #f80000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
 }
 
 td button:nth-child(2):hover{ 
