@@ -59,12 +59,12 @@ button{
 }
 
 /* Center the buttons in the Actions column */
-.actions-cell {
+td {
   text-align: center;
 }
 
 /* Make each button keep icon + text stacked */
-.actions-cell button {
+td button {
   display: inline-flex;       /* keeps them side by side */
   flex-direction: column;     /* stacks icon above text */
   align-items: center;
@@ -78,18 +78,18 @@ button{
 }
 
 /* Edit button */
-.actions-cell .edit-btn {
+.edit-btn {
   background-color: rgb(144, 213, 255);
 }
-.actions-cell .edit-btn:hover {
+.edit-btn:hover {
   background-color: rgb(12, 97, 158);
 }
 
 /* Delete button */
-.actions-cell .delete-btn {
+.delete-btn {
   background-color: rgb(255, 123, 123);
 }
-.actions-cell .delete-btn:hover {
+.delete-btn:hover {
   background-color: rgb(158, 12, 12);
 }
 
