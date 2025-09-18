@@ -76,6 +76,11 @@ button{
 }
 .edit-btn:hover {
   background-color: rgb(12, 97, 158);
+}
+
+/* Delete button */
+.delete-btn {
+  background-color: #f80000;
   display: inline-flex;       /* keeps them side by side */
   flex-direction: column;     /* stacks icon above text */
   align-items: center;
@@ -86,11 +91,6 @@ button{
   border-radius: 6px;
   color: white;
   cursor: pointer;
-}
-
-/* Delete button */
-.delete-btn {
-  background-color: #f80000;
 }
 .delete-btn:hover {
   background-color: #bf0404;
