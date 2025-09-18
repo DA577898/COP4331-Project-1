@@ -58,11 +58,6 @@ button{
     color: #ffffff;
 }
 
-/* Center the buttons in the Actions column */
-td {
-  text-align: center;
-}
-
 /* Make each button keep icon + text stacked */
 td button {
   display: inline-flex;       /* keeps them side by side */
