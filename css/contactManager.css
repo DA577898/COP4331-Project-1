@@ -87,10 +87,10 @@ td button {
 
 /* Delete button */
 .delete-btn {
-  background-color: rgb(255, 123, 123);
+  background-color: #f80000;
 }
 .delete-btn:hover {
-  background-color: rgb(158, 12, 12);
+  background-color: #bf0404;
 }
 
 
