@@ -271,3 +271,22 @@ td{
     text-align: left;
 }
 
+
+.form-row {
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.form-row label {
+  width: 100px;
+  font-size: 12px;   
+  text-align: left;
+  margin-right: 10px;
+}
+
+.form-row input {
+  flex: 1;
+  padding: 8px;
+}
+
