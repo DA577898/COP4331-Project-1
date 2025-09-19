@@ -21,8 +21,15 @@ body{
     background-color: rgb(144, 213, 255);
 }
 
-.table-header p {
-    color: black;
+.table-header p, .search-wrapper label {
+    color: rgb(12, 97, 158);
+    font-weight: bold;
+    text-shadow: 
+        -1px -1px 0 white,
+        1px -1px 0 white,   
+        -1px 1px 0 white,   
+        1px 1px 0 white; 
+    font-size: 30px;
 }
 
 #table-border{
@@ -51,26 +58,51 @@ button{
     color: #ffffff;
 }
 
-td button:nth-child(1){ /* this is the edit button */
-    background-color: rgb(144, 213, 255);
+
+
+/* Edit button */
+.edit-btn {
+  background-color: rgb(144, 213, 255);
+  display: inline-flex;       /* keeps them side by side */
+  flex-direction: column;     /* stacks icon above text */
+  align-items: center;
+  justify-content: center;
+  gap: 4px;                   /* space between icon + text */
+  padding: 6px 10px;          /* keep same look as before */
+  border: none;
+  border-radius: 6px;
+  color: black;
+  cursor: pointer;
+}
+.edit-btn:hover {
+  background-color: rgb(12, 97, 158);
 }
 
-td button:nth-child(1):hover{
-    background-color: rgb(12, 97, 158);
+/* Delete button */
+.delete-btn {
+  background-color: #f80000;
+  display: inline-flex;       /* keeps them side by side */
+  flex-direction: column;     /* stacks icon above text */
+  align-items: center;
+  justify-content: center;
+  gap: 4px;                   /* space between icon + text */
+  padding: 6px 10px;          /* keep same look as before */
+  border: none;
+  border-radius: 6px;
+  color: black;
+  cursor: pointer;
+}
+.delete-btn:hover {
+  background-color: #bf0404;
 }
 
-td button:nth-child(2){ 
-    background-color: #f80000;
-}
 
-td button:nth-child(2):hover{ 
-    background-color: #bf0404;
-}
 
 .add-contact-button{
-    padding: 10px 20px;
+    padding: 10px 25px;
     color: white;
     background-color: rgb(12, 97, 158);
+    font-size: 14px;
 }
 
 .add-contact-button:hover{
@@ -116,6 +148,43 @@ td{
     background-color: white;
 }
 
+.pagination{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 10px 20px;
+    /*background-color: green;*/
+}
+
+.pagination div{
+    padding: 10px;
+    border: 2px solid #e7e1e1;
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0298cfbb;
+    color: #ffffff;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.618);
+    margin: 0 5px;
+    cursor: pointer;
+}
+.pagination div:hover{
+    background-color: #016c93;
+}
+
+.pagination div.active-page{
+    background-color: rgb(0, 89, 153);
+    color: white;
+    font-weight: bold;
+}
+
+.pagination div.active-page:hover{
+    background-color: rgb(0, 60, 102);
+    color: white;
+}
 
 #table-column-names{
     width: 100;
@@ -141,9 +210,10 @@ td{
 #logout-button{
     display: block;
     margin: 20px auto;
-    padding: 10px 20px;
+    padding: 15px 40px;
     color: white;
     background-color: rgb(12, 97, 158);
+    font-size:25px;
 }
 
 #logout-button:hover{
@@ -201,6 +271,7 @@ td{
     text-align: left;
 }
 
+
 .form-row {
   display: flex;
   align-items: center;
@@ -218,3 +289,4 @@ td{
   flex: 1;
   padding: 8px;
 }
+

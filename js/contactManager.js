@@ -6,6 +6,10 @@
 
     let contactsData = []; // an empty array of contact objects (initialized)
     let currentEditIndex = 0;
+    let currentPage = 1;
+    let totalPages = 1;
+    let contactsPerPage = 10;
+    let searchValue = '';
 
 /*
     When page loads, checking if a user is logged in by looking for id in local storage.
@@ -16,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log("Stored userId:", userId, "Type:", typeof userId);
 
     if(!userId){
-        window.location.href = 'index.html';
+        window.location.href = '/';
         return;
     }
 
@@ -29,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('search');
     if(searchInput) {
         searchInput.addEventListener('input', (e) => {
-            const searchValue = e.target.value.trim();
+            searchValue = e.target.value.trim();
             console.log(searchValue)
 
             loadContacts(userId, searchValue);    
@@ -143,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.removeItem('userId');
         localStorage.removeItem('firstName');
         localStorage.removeItem('lastName');
-        window.location.href = 'index.html';
+        window.location.href = '/';
     });
 });
 
@@ -162,28 +166,42 @@ function loadContacts(userId, searchValue = '') {
         },
         body: JSON.stringify({
             userId: parseInt(userId),
-            search: searchValue
+            search: searchValue,
+            num_contacts: contactsPerPage,
+            num_page: currentPage
         })
     })
     .then(response => response.json())
     .then(data => {
 
         if (data.results) {
+            totalPages = data.pagination.totalPages;
             displayContacts(data.results);
-
+            displayPagination(data.pagination);
+            if(currentPage > totalPages){
+                currentPage = totalPages;
+                displayPagination(pagination);
+                loadContacts(userId, searchValue)
+            }
         } else if (data.error === 'No Records Found'){
             console.log("There were no contacts found for this search value:", searchValue);
+            totalPages = 1;
             displayContacts([]);
+            displayPagination([]);
         } else if (data.error){
             console.log("Error loading contacts", data.error);
+            totalPages = 1;
             displayContacts([]);
+            displayPagination([]);
         }   
 
     })
     .catch(error => {
         console.log("Error loading contacts:", error);
         displayContacts([]);
+        displayPagination([]);
     });
+
 }
 
 /*
@@ -206,9 +224,13 @@ function displayContacts(contacts) {
             <td>${contact.phoneNumber}</td>
             <td>
                 <button class="edit-btn" data-id="${index}">
-                    <i class="fa-solid fa-pen-to-square"></i></button>
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <span>Edit</span>
+                </button>
                 <button class="delete-btn" data-id="${contact.contactId}">
-                    <i class="fa-solid fa-trash"></i></button>
+                    <i class="fa-solid fa-trash"></i>
+                    <span>Delete</span>
+                </button>
             </td>
         `;
         contactTableBody.appendChild(row);
@@ -263,6 +285,7 @@ function deleteContact(contactId) {
             if (data.error === "") {
                 console.log("Deleted contact:", contactId);
                 loadContacts(userId, ''); // refresh list
+                displayPagination([]);
             } else {
                 console.log("Error deleting:", data.error);
             }
@@ -272,5 +295,66 @@ function deleteContact(contactId) {
     }
 }
 
+function displayPagination(pagination) {
+    const paginationContainer = document.getElementById('pagination');
+    paginationContainer.innerHTML = '';
+    userId = localStorage.getItem('userId');
 
+    // First page button
+    const firstPageDiv = document.createElement('div');
+    firstPageDiv.innerHTML = '<i class="fa-solid fa-angles-left"></i>';
+    paginationContainer.appendChild(firstPageDiv);
+    firstPageDiv.addEventListener('click', () => {
+        currentPage = 1;
+        displayPagination(pagination);
+        loadContacts(userId, searchValue);
+    });
 
+    // Previous page button
+    const prevPageDiv = document.createElement('div');
+    prevPageDiv.innerHTML = '<i class="fa-solid fa-angle-left"></i>';
+    paginationContainer.appendChild(prevPageDiv);
+    prevPageDiv.addEventListener('click', () => {
+        if(currentPage > 1) {
+            currentPage--;
+        }
+        displayPagination(pagination);
+        loadContacts(userId, searchValue);
+    });
+    // Page numbers
+    for(let i = 1; i <= totalPages; i++) {
+        const pageDiv = document.createElement('div');
+        pageDiv.textContent = i;
+        if(i === currentPage) {
+            pageDiv.classList.add('active-page');
+        }
+        paginationContainer.appendChild(pageDiv);
+        pageDiv.addEventListener('click', () => {
+            currentPage = i;
+            displayPagination(pagination);
+            loadContacts(userId, searchValue);
+        });
+    }
+
+    // Next page button
+    const nextPageDiv = document.createElement('div');
+    nextPageDiv.innerHTML = '<i class="fa-solid fa-angle-right"></i>';
+    paginationContainer.appendChild(nextPageDiv);
+    nextPageDiv.addEventListener('click', () => {
+        if(currentPage < totalPages) {
+            currentPage++;
+        }
+        displayPagination(pagination);
+        loadContacts(userId, searchValue);
+    });
+
+    // Last page button
+    const lastPageDiv = document.createElement('div');
+    lastPageDiv.innerHTML = '<i class="fa-solid fa-angles-right"></i>';
+    paginationContainer.appendChild(lastPageDiv);
+    lastPageDiv.addEventListener('click', () => {
+        currentPage = totalPages;
+        displayPagination(pagination);
+        loadContacts(userId, searchValue);
+    });
+}
