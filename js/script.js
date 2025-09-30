@@ -107,7 +107,7 @@ document.querySelector("#buttonSignIn").addEventListener("click", (e) =>
             window.location.href = "contactManager.html"
         } else 
         {
-            loginError.textContent = "*username or password was not found. Please try again";
+            loginError.textContent = "*Username or password was not valid. Please try again";
             console.log("There was an error", data.error); // showing what the actual error is
         }
     })
