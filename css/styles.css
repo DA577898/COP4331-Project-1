@@ -224,3 +224,9 @@ input
 #btn-to-contact-manager{
     margin-bottom: 50px;
 }
+
+.error-text { 
+    color: red; 
+    margin-top: 6px; 
+    font-size: 0.9rem; 
+}

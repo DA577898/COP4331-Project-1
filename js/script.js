@@ -4,6 +4,8 @@
 const registerButton = document.getElementById("register");
 const signInButton = document.getElementById("signIn");
 const container = document.getElementById("container");
+const registerError = document.getElementById("registerError");
+const loginError = document.getElementById("loginError");
 
 registerButton.addEventListener("click", () => 
 {
@@ -54,16 +56,17 @@ document.querySelector("#buttonRegister").addEventListener("click", (e) =>
             console.log("Registration Successful");
             localStorage.setItem('userId', data.userId);
             localStorage.setItem('firstName', data.FirstName);
-            localStorage.setItem('firstName', data.Lastname);
+            localStorage.setItem('lastName', data.Lastname);
             window.location.href = "contactManager.html"
         } else
         {
+            registerError.textContent = `*${data.error}`;
             console.log("There was an error", data.error); // showing what the actual error is
         }
     })
     .catch(error =>
     {
-        console.error("Error:", error);
+        registerError.textContent = `*${error.message}`;
     });
 });
 
@@ -104,11 +107,13 @@ document.querySelector("#buttonSignIn").addEventListener("click", (e) =>
             window.location.href = "contactManager.html"
         } else 
         {
+            loginError.textContent = "*username or password was not found. Please try again";
             console.log("There was an error", data.error); // showing what the actual error is
         }
     })
     .catch(error => 
     {
+        loginError.textContent = `*${error.message}`;
         console.error("Error:", error);
     });
 });
