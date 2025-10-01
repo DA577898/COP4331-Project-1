@@ -290,3 +290,13 @@ td{
   padding: 8px;
 }
 
+.form-row.with-helper {
+  flex-wrap: wrap;
+}
+.form-row.with-helper small {
+  width: 100%;
+  margin-left: 110px; /* label width + margin */
+  font-size: 0.75rem;
+  color: #6c757d;
+  margin-top: 4px;
+}
